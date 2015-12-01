@@ -1,26 +1,189 @@
-<style>h2 {color: darkblue;}</style>
-<p style="margin-top: 10px;color:#105cb6;font-style: italic; font-size: large">This seed shows a "typical" layout for an application that requires authentication and uses
-  <b>ROLES</b> to distinguish between what authenticated users can do.</p>
-<ul>
-  <li><b style="display: inline-block;width:14em;">Home and 'Using the Seed'</b>Can be seen by all</li>
-  <li><b style="display: inline-block;width:14em;">Page for Users</b> Access to data (REST) requires user to be authenticated as a <em>User</em></li>
-  <li><b style="display: inline-block;width:14em;">Page for Admins</b> Access to data (REST) requires user to be authenticated as an <em>Admin</em></li>
-</ul>
+<form class="navbar-form navbar-left" role="search">
+    <div class="form-group" >
+        <select name="From" class="form-control">
+            <option>Tirana - Rinas (TIA), Albania</option>
+            <option>Luanda - 4 de Fevereiro (LAD), Angalo</option>
+            <option>Bariloche - Bariloche intl (BRC), Argentina</option>
+            <option>Buenos Aires - all airports(2), Argentina</option>
+            <option>Buenos Aires - Ezeiza Ministro Pistarini(EZE), Argentina</option>
+            <option>Buenos Aires - J. newbery (AEP), Argentina</option>
+            <option>Cordoba - Pajas Blancas (COR). Argentina</option>
+            <option>El Calafate - El Calafate (FTE), Argentina</option>
+            <option>Mendoza - El Plumerillo (MDZ), Argentina</option>
+            <option>Rosario - Rosario (ROS), Argentina</option>
+            <option>Ushuaia - Ushuaia (USH), Argentina</option>
+            <option>Yerevan - Zvartnots Airport (EVN), Armenia</option>
+            <option>Aruba - Queen Beatrix Airport (AUA), Aruba</option>
+            <option>Adelaide - Adelaide intl. airport (ADL), Australia</option>
+            <option>Brisbane - Brisbane intl. airport (BNE), Australia</option>
+            <option>Cairns - Cairns (CNS), Australia</option>
+            <option>Gold Coast - Coolangatta (OOL), Australia</option>
+            <option>Melbourne - Tullamarine Airport(MEL), Australia</option>
+            <option>Perth - Perth Airport (PER), Australia</option>
+            <option>Sydney - Kingsford Smith intl. airport(SYD), Australia</option>
+            <option>InnsBruck - Innsbruck (INN), Austria</option>
+            <option>Salzburg - Wolfgang a Mozart (SZG), Austria</option>
+            <option>Vienna - Schwechat (VIE), Austria</option>
+            <option>Bahrain - International Airport (BAH), Bahrain</option>
+            <option>Minsk - Minsk National Airport (MSQ), Belarus</option>
+            <option>Antwerp - Antwerp Central Railway Station (ZWE), Belgium</option>
+            <option>Antwerp - Antwerp int'l Airport (ANR), Belgium</option>
+            <option>Brussel - Brussel Airport (BRU), Belgium</option>
+            <option>Brussel - Brussels Midi Railway Station (ZYR), Belgium</option>
+            <option>Liège - Liège Airport (LGG), Belgium</option>
+            <option>Belize City - PSW Goldson International (BZE), Belize</option>
+            <option>La Paz - El Alto (LPB), Bolivia</option>
+            <option>Santa Cruz - Viru Viru intl. (VVI), Bolivia</option>
+            <option>Bonaire - Flamingo International (BON), Bonaire, St. Eustatius and Saba</option>
+            <option>Sarajevo - Sarajevo intl (SJJ), Bosnia and Herzegovina</option>
+            <option>Gaborone - Gaborone intl. (GBE), Botswana</option>
+            <option>Aracaju - Aracaju (AJU), Brazil</option>
+            <option>Belem - Val De Cans (BEL), Brazil</option>
+            <option>Belo Horizonte - Tancredo Neves (CNF), Brazil</option>
+            <option>Boa Vista - Boa vista (BVB), Brazil</option>
+            <option>Brasilia - Brasilia intl. (BSB), Brazil</option>
+            <option>Campinas - Campinas International (CPQ), Brazil</option>
+            <option>Campo Grande - International (CGR), Brazil</option>
+            <option>Cuiaba - M. Rondon (CGB), Brazil</option>
+            <option>Curitiba - Afonso Pena (CWB), Brazil</option>
+            <option>Florianopolis - Hercilio Luz (FLN), Brazil</option>
+            <option>Fortaleza - Pinto Martins (FOR), Brazil</option>
+            <option>Goiania - Santa Genoveva (GYN), Brazil</option>
+            <option>Iguassu Falls - Cataratas (IGU), Brazil</option>
+            <option>Iihèus - Jorge Amado Airport (IOS), Brazil</option>
+            <option>Joao Pessoa - Castro Pinto (JPA), Brazil</option>
+            <option>Londrina - Londrian Airport (LDB), Brazil</option>
+            <option>Maceio - Palmares (MCZ), Brazil</option>
+            <option>Manaus - Eduardo Gomes (MAO), Brazil</option>
+            <option>Maringa - Regional De Maringa (MGF), Brazil</option>
+            <option>Natal - Augusto Severo (NAT), Brazil</option>
+            <option>Navegantes - Navegantes (NVT), Brazil</option>
+            <option>Porto Alegra - Salgado Filho (POA), Brazil</option>
+            <option>Porto Seguro - Porto Seguro (BPS), Brazil</option>
+            <option>Recife - Guararapes International (REC), Brazil</option>
+            <option>Ribeirão Preto - Dr. Leite Lopes (RAO), Brazil</option> 
+            <option>Rio de Janeiro - Rio International (GIG), Brazil</option> 
+            <option>Rio de Janeiro - Santos Dumont Airport (SDU), Brazil</option> 
+            <option>Salvador - Luis E Magalhaes (SSA), Brazil</option> 
+            <option>Sao Jose Do Rio Preto - Sau Jose Do Rio Preto (SJP), Brazil</option> 
+            <option>Sao Luiz - Mal Cunha Maxha (SLZ), Brazil</option> 
+            <option>Sao Paulo - Congonhas (CGH), Brazil</option> 
+            <option>Sao Paulo - Guarulhos International (GRU), Brazil</option> 
+            <option>Sao Paulo - Virapos (VCP), Brazil</option> 
+            <option>Teresina - Teresina (THE), Brazil</option> 
+            <option>Vitoria - Eurico Sales (VIX), Brazil</option> 
+            <option>Bandar Seri Begawan - Brunei intl. (BWN), Brunei</option> 
+            <option>Sofia - Sofia International Airport (SOF), Bulgaria</option> 
+            <option>Bujumbura - Bujumbura intl. (BJM), Burundi</option> 
+            <option>Phnom Penh - Pochentong (PHN), Cambodia</option> 
+            <option>Siem Reap - Siem Reap (Angkor Wat)(REP), Cambodia</option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
+            <option></option> 
 
-<div>
-  <h2>Filter Demo</h2>
-  <ul>
-    <li>Using the checkmark filter with True: {{true | checkmark}} </li>
-    <li>Using the checkmark filter with False: {{false | checkmark}} </li>
-  </ul>
-  <p><span style="font-weight: bold">TESTING: </span><em>See testFilters.js</em> in the Unit Test Folder for an example of how to test a filter</p>
-</div>
-<div>
-  <h2>Factory + Service Demo</h2>
-  <p>This message is fetched from a factory: <span style="font-weight: bold"> {{ctrl.msgFromFactory}}</span></p>
-  <p>This message is fetched from a Service: <span style="font-weight: bold"> {{ctrl.msgFromService}}</span></p>
-  <p><span style="font-weight: bold">TESTING: </span>See <em>testFactories.js</em> and <em>testServices.js</em> in the Unit Test Folder for examples of how to test Factories and Services</p>
-</div>
+        </select>
+        <select name="To" class="form-control">
+            <option>Paris</option>
+            <option>Dubai</option>
+        </select>
+        <input type="date" class="form-control">
+        <input type="text" class="form-control" placeholder="Number of Passengers">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+</form>
 
-
-<h3 style="color: darkred;"><em>Important: This seed is NOT meant for Real Life Projects.</em></h3>
+<table class="table">
+    <thead>
+    <th>Airline</th>
+    <th>Number of Tickets</th>
+    <th>Date</th>
+    <th>Price</th>
+    <th>ID</th>
+    <th>Travle Time</th>
+    <th>Departure Airport</th>
+    <th>Destination Airport</th>
+</thead>
+<tbody>
+    <tr>
+        <td></td>
+    </tr>
+</tbody>
+</table>

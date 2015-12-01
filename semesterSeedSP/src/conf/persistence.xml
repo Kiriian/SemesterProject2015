@@ -4,18 +4,18 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.User</class>
     <class>entity.Role</class>
+    <class>entity.Airline</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- REPLACE ALL THIS WITH INFO FOR YOUR OWN DB -->
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.user" value="ca2"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="test"/>
+      <property name="javax.persistence.jdbc.password" value="ca2"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="eclipselink.canonicalmodel.subpackage" value="development"/>
     </properties>
   </persistence-unit>
-  
   <persistence-unit name="PU_OPENSHIFT" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <non-jta-data-source>java:/comp/env/jdbc/MySQLDS</non-jta-data-source>
