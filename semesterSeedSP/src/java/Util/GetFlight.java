@@ -6,43 +6,78 @@
 package Util;
 
 import entity.Flight;
+import facades.RequestFacade;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 
 /**
  *
  * @author Pernille
  */
-public class GetFlight implements Callable<Flight>
+public class GetFlight implements Callable<List<Flight>>
 {
+
+    private URL url = null;
+    private String finalUrl = "";
+    private URLConnection urlConn = null;
+    private InputStreamReader in = null;
+    private StringBuilder sb = new StringBuilder();
+    private BufferedReader bufferedReader = null;
+    private String needToBecomeFlight;
+    private JSONArray jsonArray;
+    private List<Flight> flights;
+    private JSONObject object;
+
+    public GetFlight(String finalUrl)
+    {
+        this.finalUrl = finalUrl;
+    }
 
     //kalde metoden getAirlines i facade
     //callable - sende get ud til alle i databasen
     //modtage json resultater
     //videresende json resultater
-    public List<Flight> getFlights(String airport, String date, int numberOfTickets)
-    {
-        //
-        return null;
-    }
-
     @Override
-    public Flight call() throws Exception
+    public List<Flight> call() throws Exception
     {
-        try
+        url = new URL(finalUrl);
+        urlConn = url.openConnection();
+        if (urlConn != null && urlConn.getInputStream() != null)
         {
-            
+            in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
+            bufferedReader = new BufferedReader(in);
+            while ((needToBecomeFlight = bufferedReader.readLine()) != null)
+            {
+                sb.append(needToBecomeFlight);
+                jsonArray.add(sb.toString());
+            }
         }
-
-        return new Flight(date, numberOfSeats, totalPrice, flightID, traveltime, destination, origin);
-
-    }
-    catch (Exception e) {
-            //System.out.println("Error trying to fetch - " + e);
+        in.close();
+        
+        flights = new ArrayList();
+        
+        for (Object json : jsonArray)
+        {
+            object = (JSONObject) json;
+            flights.add(new Flight(
+                    (String) object.get("date"),
+                    (int) object.get("numberOfSeats"),
+                    (Double) object.get("priceTotal"),
+                    (String) object.get("flightId"),
+                    (int) object.get("travelTime"),
+                    (String) object.get("destination"),
+                    (String) object.get("origin")));
         }
-
-
-return null;
-    }
+        
+        return flights;
+        
     }
 }

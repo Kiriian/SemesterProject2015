@@ -49,8 +49,7 @@ public class PrototypeFacade
             }
             if (urlConn != null && urlConn.getInputStream() != null)
             {
-                in = new InputStreamReader(urlConn.getInputStream(),
-               Charset.defaultCharset());
+                in = new InputStreamReader(urlConn.getInputStream(),Charset.defaultCharset());
                 BufferedReader bufferedReader = new BufferedReader(in);
                 if (bufferedReader != null)
                 {

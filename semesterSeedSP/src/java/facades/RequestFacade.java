@@ -31,14 +31,15 @@ public class RequestFacade
         return urls;
     }
 
-    public List<Flight> getFlights() throws InterruptedException, ExecutionException {
-        
+    public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException {
+        String finalUrl = "";
         List<Flight> flights = new ArrayList();
         List<Future<Flight>> list = new ArrayList();
         ExecutorService executor = Executors.newFixedThreadPool(4);
         
         for (String url : urls) {
-            Future<Flight> future = executor.submit(new GetFlight());
+            finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
+            Future<Flight> future = executor.submit(new GetFlight(finalUrl));
             list.add(future);
         }
         
