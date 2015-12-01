@@ -9,9 +9,9 @@
     <properties>
       <!-- REPLACE ALL THIS WITH INFO FOR YOUR OWN DB -->
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="ca2"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="ca2"/>
+      <property name="javax.persistence.jdbc.password" value="test"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="eclipselink.canonicalmodel.subpackage" value="development"/>
     </properties>
