@@ -18,6 +18,6 @@ public class Test
     {
         RequestFacade rf = new RequestFacade();
                 
-        rf.getFlights("CPH","2016-01-04T23:00:00.000Z", 3);
+        System.out.println(rf.getFlights("CPH","STN","2016-01-04T23:00:00.000Z", 1));
     }
 }

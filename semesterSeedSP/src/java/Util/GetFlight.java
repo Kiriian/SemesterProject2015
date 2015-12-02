@@ -58,6 +58,7 @@ public class GetFlight implements Callable<List<Flight>>
         urlConn = url.openConnection();
         if (urlConn != null && urlConn.getInputStream() != null)
         {
+            
             in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
             bufferedReader = new BufferedReader(in);
             int cp;
@@ -67,7 +68,6 @@ public class GetFlight implements Callable<List<Flight>>
             }
             object = new JsonParser().parse(sb.toString()).getAsJsonObject();
 
-            object.get("flights").getAsJsonArray();
             jsonArray = object.get("flights").getAsJsonArray();
             
             for (int i = 0; i < jsonArray.size(); i++)
