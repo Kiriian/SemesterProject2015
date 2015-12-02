@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import us.monoid.web.Resty;
 
 /**
  *
@@ -25,16 +26,17 @@ import net.minidev.json.JSONObject;
 public class GetFlight implements Callable<List<Flight>>
 {
 
-    private URL url = null;
+//    private URL url = null;
     private String finalUrl = "";
-    private URLConnection urlConn = null;
-    private InputStreamReader in = null;
-    private StringBuilder sb = new StringBuilder();
-    private BufferedReader bufferedReader = null;
-    private String needToBecomeFlight;
-    private JSONArray jsonArray;
-    private List<Flight> flights;
-    private JSONObject object;
+//    private URLConnection urlConn = null;
+//    private InputStreamReader in = null;
+//    private StringBuilder sb = new StringBuilder();
+//    private BufferedReader bufferedReader = null;
+//    private String needToBecomeFlight;
+    private JSONArray jsonArray = null;
+    private List<Flight> flights = null;
+    private JSONObject object = null;
+    private Resty resty = null;
 
     public GetFlight(String finalUrl)
     {
@@ -48,19 +50,23 @@ public class GetFlight implements Callable<List<Flight>>
     @Override
     public List<Flight> call() throws Exception
     {
-        url = new URL(finalUrl);
-        urlConn = url.openConnection();
-        if (urlConn != null && urlConn.getInputStream() != null)
-        {
-            in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
-            bufferedReader = new BufferedReader(in);
-            while ((needToBecomeFlight = bufferedReader.readLine()) != null)
-            {
-                sb.append(needToBecomeFlight);
-                jsonArray.add(sb.toString());
-            }
-        }
-        in.close();
+//        url = new URL(finalUrl);
+//        urlConn = url.openConnection();
+//        if (urlConn != null && urlConn.getInputStream() != null)
+//        {
+//            in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
+//            bufferedReader = new BufferedReader(in);
+//            while ((needToBecomeFlight = bufferedReader.readLine()) != null)
+//            {
+//                sb.append(needToBecomeFlight);
+//                jsonArray.add(sb.toString());
+//            }
+//        }
+//        in.close();
+        
+        resty = new Resty();
+        
+        jsonArray = (JSONArray) resty.json(finalUrl).get("flights");
         
         flights = new ArrayList();
         

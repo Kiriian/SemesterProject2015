@@ -19,37 +19,43 @@ import javax.persistence.Persistence;
 
 public class RequestFacade
 {
+
     private List<String> urls;
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
-    
+
     public List<String> getAirlines()
     {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-         urls = em.createQuery("SELECT u.url from Airline u").getResultList();
+        urls = em.createQuery("SELECT u.url from Airline u").getResultList();
         em.getTransaction().commit();
         return urls;
     }
 
-    public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException {
-        String finalUrl = "";
+    public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException
+    {
+        String finalUrl;
         List<Flight> flights = new ArrayList();
         List<Future<Flight>> list = new ArrayList();
         ExecutorService executor = Executors.newFixedThreadPool(4);
-        
-        for (String url : urls) {
+
+        for (String url : urls)
+        {
             finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
-            Future<Flight> future = executor.submit(new GetFlight(finalUrl));
+            Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
             list.add(future);
         }
-        
-        for (Future<Flight> future : list) {
-            
-            if (future.get() != null) 
+
+        for (Future<Flight> future : list)
+        {
+
+            if (future.get() != null)
+            {
                 flights.add(future.get());
+            }
         }
-        
+
         return flights;
     }
-    
+
 }
