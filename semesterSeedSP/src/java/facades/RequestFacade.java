@@ -35,27 +35,26 @@ public class RequestFacade
     public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException
     {
         String finalUrl;
+        urls = getAirlines();
         List<Flight> flights = new ArrayList();
-        List<Future<Flight>> list = new ArrayList();
+        List<Future<List<Flight>>> list = new ArrayList();
         ExecutorService executor = Executors.newFixedThreadPool(4);
-
+        
         for (String url : urls)
         {
             finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
             Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
             list.add(future);
         }
-
-        for (Future<Flight> future : list)
+        
+        for (Future<List<Flight>> future : list)
         {
-
-            if (future.get() != null)
+            List<Flight> temp = future.get();
+            for (Flight temp1 : temp)
             {
-                flights.add(future.get());
+                flights.add(temp1);
             }
         }
-
         return flights;
     }
-
 }

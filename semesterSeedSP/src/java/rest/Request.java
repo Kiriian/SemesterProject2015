@@ -5,7 +5,13 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import entity.Flight;
 import facades.RequestFacade;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -26,7 +32,8 @@ public class Request
 
     @Context
     private UriInfo context;
-    RequestFacade rf = new RequestFacade();
+    private RequestFacade rf = new RequestFacade();
+    private Gson gson = new Gson();
 
     /**
      * Creates a new instance of Request
@@ -39,9 +46,24 @@ public class Request
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{airport}/{date}/{numberOfTickets}")
-    public String getJson(@PathParam("airport") String airport, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets)
+    public String getJson(@PathParam("airport") String airport, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException
     {
-        rf.getFlights(airport, date, numberOfTickets);
+        List<Flight> flights = rf.getFlights(airport, date, numberOfTickets);
+        JsonArray json = new JsonArray();
+        for (Flight f : flights)
+        {
+            JsonObject jo = new JsonObject();
+            jo.addProperty("date", f.getDate());
+            jo.addProperty("numberOfSeats", f.getNumberOfSeats());
+            jo.addProperty("totalPrice", f.getTotalPrice());
+            jo.addProperty("flightID", f.getFligthID());
+            jo.addProperty("traveltime", f.getTraveltime());
+            jo.addProperty("destination", f.getDestination());
+            jo.addProperty("origin", f.getOrigin());
+            json.add(jo);
+        }
+        String jsonStr = gson.toJson(json);
+        return jsonStr;
     }
 
     /**

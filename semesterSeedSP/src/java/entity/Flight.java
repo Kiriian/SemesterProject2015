@@ -101,6 +101,12 @@ public class Flight
     {
         this.destination = destination;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Flight{" + "date=" + date + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", fligthID=" + fligthID + ", traveltime=" + traveltime + ", destination=" + destination + ", origin=" + origin + '}';
+    }
     
     
     
