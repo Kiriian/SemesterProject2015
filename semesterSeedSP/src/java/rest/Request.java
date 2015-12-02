@@ -66,14 +66,27 @@ public class Request
         return jsonStr;
     }
 
-    /**
-     * PUT method for updating or creating an instance of Request
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
-    @PUT
+   @GET
+    @Produces("application/json")
     @Consumes("application/json")
-    public void putJson(String content)
+    @Path("{airport}/{destination}/{date}/{numberOfTickets}")
+    public String getJson(@PathParam("airport") String airport,@PathParam("destination") String destination, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException
     {
+        List<Flight> flights = rf.getFlights(airport, destination, date, numberOfTickets);
+        JsonArray json = new JsonArray();
+        for (Flight f : flights)
+        {
+            JsonObject jo = new JsonObject();
+            jo.addProperty("date", f.getDate());
+            jo.addProperty("numberOfSeats", f.getNumberOfSeats());
+            jo.addProperty("totalPrice", f.getTotalPrice());
+            jo.addProperty("flightID", f.getFligthID());
+            jo.addProperty("traveltime", f.getTraveltime());
+            jo.addProperty("destination", f.getDestination());
+            jo.addProperty("origin", f.getOrigin());
+            json.add(jo);
+        }
+        String jsonStr = gson.toJson(json);
+        return jsonStr;
     }
 }
