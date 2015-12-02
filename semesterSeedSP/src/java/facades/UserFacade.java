@@ -16,9 +16,30 @@ public class UserFacade {
 
   EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
-  public UserFacade() {
+  public UserFacade() 
+  {
    
   }
+  EntityManager getEntityManager()
+    {
+        return emf.createEntityManager();
+    }
+  public User saveUser(User user)
+    {
+        EntityManager em = getEntityManager();
+//        String hashedPassword = PasswordHash.createHash(user.getPassword());
+//        user.setPassword(hashedPassword);
+        try
+        {
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+            return em.find(User.class, user.getUserName());
+        } finally
+        {
+            em.close();
+        }
+    }
 
   public User getUserByUserId(String id) {
     EntityManager em = emf.createEntityManager();

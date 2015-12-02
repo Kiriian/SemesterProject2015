@@ -1,0 +1,13 @@
+<form class="navbar-form navbar-middle" role="form" ng-submit="saveUser()">
+              <div class="form-group">
+                <input type="text" style="width:12em;" placeholder="User name" class="form-control"
+                       ng-model="user.username">
+              </div>
+              <div class="form-group">
+                <input type="password" style="width:12em;" placeholder="Password" class="form-control"
+                       ng-model="user.password">
+              </div>
+              <button type="submit" class="btn btn-success">Create User</button>
+            </form>
+ <p ng-class="{'text-success': !myVar, 'text-danger': myVar}">{{message}}</p>
+
