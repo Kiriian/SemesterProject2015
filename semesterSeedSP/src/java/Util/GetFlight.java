@@ -87,6 +87,7 @@ public class GetFlight implements Callable<List<Flight>>
                 flights.add(f);
             }
         }
+        System.out.println(flights.toString());
         return flights;
     }
 }
