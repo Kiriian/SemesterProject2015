@@ -24,11 +24,11 @@ public class UserFacade {
     {
         return emf.createEntityManager();
     }
-  public User saveUser(User user)
+  public User saveUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         EntityManager em = getEntityManager();
-//        String hashedPassword = PasswordHash.createHash(user.getPassword());
-//        user.setPassword(hashedPassword);
+        String hashedPassword = PasswordHash.createHash(user.getPassword());
+        user.setPassword(hashedPassword);
         try
         {
             em.getTransaction().begin();
