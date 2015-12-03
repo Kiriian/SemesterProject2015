@@ -12,8 +12,10 @@ angular.module('myApp.view1', ['ngRoute'])
 
         .controller('View1Ctrl', function ($scope, $http)
         {
-            $scope.convert = function () {
+            $scope.search = function () {
+                
                 var baseUrl = 'api/flightinfo/';
+  
                 if ($scope.destination !== null)
                 {
                     var attributes = $scope.origin + "/" + $scope.destination + "/" + $scope.date + "/" + $scope.nop;
@@ -23,6 +25,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 }
             
             var url = baseUrl + attributes;
+            alert(url);
             $http.get(url).then(function successCallBack(res) {
                 $scope.data = res.data;
             }, function errorCallBack(res) {

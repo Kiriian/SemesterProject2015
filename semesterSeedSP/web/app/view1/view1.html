@@ -88,6 +88,7 @@
             <option value="LJU">Ljubljana - Brnik (LJU), Slovenia</option> 
             <option value="LHR">London - Heathrow (LHR), United Kingdom</option> 
             <option value="LGW">London - Gatwick (LGW), United Kingdom</option> 
+            <option value="STN">London - Stanstead (STN), United Kingdom</option>
             <option value="LAX">Los Angeles (CA) - International (LAX), USA</option> 
             <option value="LUX">Luxembourg (LUX), Luxembourg</option> 
             <option value="MAD">Madrid - Barajas (MAD), Spain</option> 
@@ -226,7 +227,7 @@
             <option value="LJU">Ljubljana - Brnik (LJU), Slovenia</option> 
             <option value="LHR">London - Heathrow (LHR), United Kingdom</option> 
             <option value="LGW">London - Gatwick (LGW), United Kingdom</option> 
-            <option value="LGW">London - Stanstead (STN), United Kingdom</option>
+            <option value="STN">London - Stanstead (STN), United Kingdom</option>
             <option value="LAX">Los Angeles (CA) - International (LAX), USA</option> 
             <option value="LUX">Luxembourg (LUX), Luxembourg</option> 
             <option value="MAD">Madrid - Barajas (MAD), Spain</option> 
@@ -278,7 +279,7 @@
         </select>
         <input type="date" class="form-control" ng-model="date">
         <input type="text" class="form-control" placeholder="Number of Passengers" ng-model="nop">
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" ng-click="search()">Submit</button>
     </div>
 </form>
 
