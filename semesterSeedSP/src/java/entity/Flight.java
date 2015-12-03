@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class Flight
 {
+    private String airlineName;
     private String date;
     private int numberOfSeats;
     private double totalPrice;
@@ -21,8 +22,9 @@ public class Flight
     private String destination;
     private String origin;
 
-    public Flight(String date, int numberOfSeats, double totalPrice, String fligthID, int traveltime, String destination, String origin)
+    public Flight(String airlineName, String date, int numberOfSeats, double totalPrice, String fligthID, int traveltime, String destination, String origin)
     {
+        this.airlineName = airlineName;
         this.date = date;
         this.numberOfSeats = numberOfSeats;
         this.totalPrice = totalPrice;
@@ -30,6 +32,16 @@ public class Flight
         this.traveltime = traveltime;
         this.destination = destination;
         this.origin = origin;
+    }
+
+    public String getAirlineName()
+    {
+        return airlineName;
+    }
+
+    public void setAirlineName(String airlineName)
+    {
+        this.airlineName = airlineName;
     }
 
     public String getOrigin()
@@ -105,9 +117,6 @@ public class Flight
     @Override
     public String toString()
     {
-        return "Flight{" + "date=" + date + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", fligthID=" + fligthID + ", traveltime=" + traveltime + ", destination=" + destination + ", origin=" + origin + '}';
+        return "Flight{" + "airlineName=" + airlineName + ", date=" + date + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", fligthID=" + fligthID + ", traveltime=" + traveltime + ", destination=" + destination + ", origin=" + origin + '}';
     }
-    
-    
-    
 }

@@ -31,9 +31,9 @@ public class GetFlight implements Callable<List<Flight>>
     private String finalUrl = "";
     private URLConnection urlConn = null;
     private InputStreamReader in = null;
-    private StringBuilder sb = new StringBuilder();
+    private final StringBuilder sb = new StringBuilder();
     private BufferedReader bufferedReader = null;
-    private String needToBecomeFlight;
+    private String airlineName;
     private List<Flight> flights = null;
     private Gson gson = null;
     private JsonObject object;
@@ -43,6 +43,7 @@ public class GetFlight implements Callable<List<Flight>>
     {
         this.finalUrl = finalUrl;
     }
+
 
     //kalde metoden getAirlines i facade
     //callable - sende get ud til alle i databasen
@@ -57,7 +58,8 @@ public class GetFlight implements Callable<List<Flight>>
         url = new URL(finalUrl);
         urlConn = url.openConnection();
         if (urlConn != null && urlConn.getInputStream() != null)
-        {  
+        {
+            
             in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
             bufferedReader = new BufferedReader(in);
             int cp;
@@ -66,7 +68,8 @@ public class GetFlight implements Callable<List<Flight>>
                 sb.append((char) cp);
             }
             object = new JsonParser().parse(sb.toString()).getAsJsonObject();
-
+            
+            airlineName = object.get("airline").getAsString();
             jsonArray = object.get("flights").getAsJsonArray();
             
             for (int i = 0; i < jsonArray.size(); i++)
@@ -74,6 +77,7 @@ public class GetFlight implements Callable<List<Flight>>
                 JsonObject json = (JsonObject) jsonArray.get(i);
                
                 Flight f = new Flight(
+                        airlineName,
                         json.get("date").getAsString(),
                         json.get("numberOfSeats").getAsInt(),
                         json.get("totalPrice").getAsDouble(),
@@ -81,10 +85,6 @@ public class GetFlight implements Callable<List<Flight>>
                         json.get("traveltime").getAsInt(),
                         json.get("destination").getAsString(),
                         json.get("origin").getAsString());
-                flights.add(f);        
-            }
-        }
-        in.close();
-        return flights;
+                flights.add(f); 
     }
 }
