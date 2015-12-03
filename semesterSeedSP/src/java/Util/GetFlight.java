@@ -44,7 +44,6 @@ public class GetFlight implements Callable<List<Flight>>
         this.finalUrl = finalUrl;
     }
 
-
     //kalde metoden getAirlines i facade
     //callable - sende get ud til alle i databasen
     //modtage json resultater
@@ -59,7 +58,7 @@ public class GetFlight implements Callable<List<Flight>>
         urlConn = url.openConnection();
         if (urlConn != null && urlConn.getInputStream() != null)
         {
-            
+
             in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
             bufferedReader = new BufferedReader(in);
             int cp;
@@ -68,14 +67,14 @@ public class GetFlight implements Callable<List<Flight>>
                 sb.append((char) cp);
             }
             object = new JsonParser().parse(sb.toString()).getAsJsonObject();
-            
+
             airlineName = object.get("airline").getAsString();
             jsonArray = object.get("flights").getAsJsonArray();
-            
+
             for (int i = 0; i < jsonArray.size(); i++)
             {
                 JsonObject json = (JsonObject) jsonArray.get(i);
-               
+
                 Flight f = new Flight(
                         airlineName,
                         json.get("date").getAsString(),
@@ -85,6 +84,9 @@ public class GetFlight implements Callable<List<Flight>>
                         json.get("traveltime").getAsInt(),
                         json.get("destination").getAsString(),
                         json.get("origin").getAsString());
-                flights.add(f); 
+                flights.add(f);
+            }
+        }
+        return flights;
     }
 }
