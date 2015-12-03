@@ -5,7 +5,12 @@
  */
 package test;
 
+import entity.Role;
+import entity.User;
 import facades.RequestFacade;
+import facades.UserFacade;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -14,10 +19,13 @@ import java.util.concurrent.ExecutionException;
  */
 public class Test
 {
-    public static void main(String[] args) throws InterruptedException, ExecutionException
+    public static void main(String[] args) throws InterruptedException, ExecutionException, NoSuchAlgorithmException, InvalidKeySpecException
     {
-        RequestFacade rf = new RequestFacade();
-                
-        System.out.println(rf.getFlights("CPH","STN","2016-01-04T23:00:00.000Z", 1));
+        UserFacade uf = new UserFacade();
+        
+        User u = new User();
+        u.setPassword("test");
+        u.setUserName("test");
+        System.out.println(uf.saveUser(u));
     }
 }

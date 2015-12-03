@@ -28,13 +28,11 @@ public class HandleUser
     @Consumes(MediaType.APPLICATION_JSON)
     public Response saveUser(String user) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
-        Role r = new Role("User");
+        UserFacade f = new UserFacade();
         JsonObject json = new JsonParser().parse(user).getAsJsonObject();
         User u = new User();
         u.setUserName(json.get("username").getAsString());
         u.setPassword(json.get("password").getAsString());
-        u.AddRole(r);
-        UserFacade f = new UserFacade();
         f.saveUser(u);
         JsonObject responseJson = new JsonObject();
         responseJson.addProperty("username", u.getUserName());
