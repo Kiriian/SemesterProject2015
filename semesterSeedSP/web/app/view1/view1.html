@@ -277,7 +277,8 @@
             <option value="VIE">Wien (Vienna) - Vienna International (VIE), Austria</option> 
             <option value="ZRH">Zurich (Zürich) - Kloten (ZRH), Switzerland</option>
         </select>
-        <input type="date" class="form-control" ng-model="date">
+        <!--<input type="date" class="form-control" ng-model="date">-->
+        <input ng-model="date" type="date">
         <input type="text" class="form-control" placeholder="Number of Passengers" ng-model="nop">
         <button type="submit" class="btn btn-default" ng-click="search()">Submit</button>
     </div>

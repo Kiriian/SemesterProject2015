@@ -53,6 +53,7 @@ public class Request
         for (Flight f : flights)
         {
             JsonObject jo = new JsonObject();
+            jo.addProperty("airline", f.getAirlineName());
             jo.addProperty("date", f.getDate());
             jo.addProperty("numberOfSeats", f.getNumberOfSeats());
             jo.addProperty("totalPrice", f.getTotalPrice());

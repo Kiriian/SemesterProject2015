@@ -10,26 +10,31 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
 
+        
+
         .controller('View1Ctrl', function ($scope, $http)
         {
-            $scope.search = function () {
-                
-                var baseUrl = 'api/flightinfo/';
-  
-                if ($scope.destination !== null)
-                {
-                    var attributes = $scope.origin + "/" + $scope.destination + "/" + $scope.date + "/" + $scope.nop;
-                }else
-                {
-                   var attributes = $scope.origin + "/" + $scope.date + "/" + $scope.nop; 
-                }
             
-            var url = baseUrl + attributes;
-            alert(url);
-            $http.get(url).then(function successCallBack(res) {
-                $scope.data = res.data;
-            }, function errorCallBack(res) {
-                alert("noget gik galt");
-            });
+            $scope.search = function () {
+
+                var baseUrl = 'api/flightinfo/';
+                var searchDate= $scope.date.toISOString();
+             
+
+                if ($scope.destination !== "null")
+                {
+                    var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
+                } else
+                {
+                    var attributes = $scope.origin + "/" + searchDate + "/" + $scope.nop;
+                }
+
+                var url = baseUrl + attributes;
+                
+                $http.get(url).then(function successCallBack(res) {
+                    $scope.data = res.data;
+                }, function errorCallBack(res) {
+                    alert("noget gik galt");
+                });
             };
         });
