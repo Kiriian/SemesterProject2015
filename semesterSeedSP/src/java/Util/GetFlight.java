@@ -57,8 +57,7 @@ public class GetFlight implements Callable<List<Flight>>
         url = new URL(finalUrl);
         urlConn = url.openConnection();
         if (urlConn != null && urlConn.getInputStream() != null)
-        {
-            
+        {  
             in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
             bufferedReader = new BufferedReader(in);
             int cp;
