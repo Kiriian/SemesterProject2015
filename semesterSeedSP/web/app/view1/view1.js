@@ -33,7 +33,7 @@ angular.module('myApp.view1', ['ngRoute'])
                         var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
                     }else
                     {
-                        $scope.error="hej";
+                        $scope.error="Depature airport and destination can not be the same";
                     }
                 } else
                 {

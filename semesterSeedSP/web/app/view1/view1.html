@@ -1,6 +1,6 @@
 <form class="navbar-form navbar-left" role="search">
     <div class="form-group" >
-        <select name="From" class="form-control" ng-model="origin">
+        <select name="From" class="form-control" ng-model="origin" required="">
             <option value="" disabled selected hidden>Select departing airport</option>
             <option value="AUH">Abu Dhabi - Abu Dhabi International (AUH), United Arab Emirates</option> 
             <option value="ALC">Alicante (ALC), Spain</option> 
@@ -139,7 +139,7 @@
             <option value="VIE">Wien (Vienna) - Vienna International (VIE), Austria</option> 
             <option value="ZRH">Zurich (Zürich) - Kloten (ZRH), Switzerland</option>
         </select>
-        <select name="To" class="form-control" ng-model="destination">
+        <select name="To" class="form-control" ng-model="destination" required="">
             <option value="" disabled selected hidden>Select destination</option>
             <option value="null">Any Destination</option>
             <option value="AUH">Abu Dhabi - Abu Dhabi International (AUH), United Arab Emirates</option> 
@@ -280,8 +280,8 @@
             <option value="ZRH">Zurich (Zürich) - Kloten (ZRH), Switzerland</option>
         </select>
         <!--<input type="date" class="form-control" ng-model="date">-->
-        <input ng-model="date" type="date">
-        <select name="nop" class="form-control" ng-model="nop">
+        <input ng-model="date" type="date" required="">
+        <select name="nop" class="form-control" ng-model="nop" required="">
             <option value="" disabled selected hidden>Number of passengers</option>
             <option value="1">1</option> 
             <option value="2">2</option> 
@@ -334,11 +334,5 @@
     </tr>
 </tbody>
 </table>
-<div class="container">
-        <div style="margin-top: 60px;">
-          <hr style="background: lightblue; border:0; height:7px" />
-          <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
-          <div ng-view></div>
-        </div>
-      </div>
+<div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
     
