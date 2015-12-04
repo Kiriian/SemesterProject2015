@@ -26,6 +26,11 @@ public class Airline
     {
     }
 
+    public Airline(String url)
+    {
+        this.url = url;
+    }
+
     public int getId()
     {
         return id;
