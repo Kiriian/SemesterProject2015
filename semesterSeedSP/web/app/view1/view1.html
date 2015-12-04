@@ -1,6 +1,7 @@
 <form class="navbar-form navbar-left" role="search">
     <div class="form-group" >
         <select name="From" class="form-control" ng-model="origin">
+            <option value="" disabled selected hidden>Select departing airport</option>
             <option value="AUH">Abu Dhabi - Abu Dhabi International (AUH), United Arab Emirates</option> 
             <option value="ALC">Alicante (ALC), Spain</option> 
             <option value="AMM">Amman - Queen Alia International Airport (AMM), Jordan</option> 
@@ -139,6 +140,7 @@
             <option value="ZRH">Zurich (Zürich) - Kloten (ZRH), Switzerland</option>
         </select>
         <select name="To" class="form-control" ng-model="destination">
+            <option value="" disabled selected hidden>Select destination</option>
             <option value="null">Any Destination</option>
             <option value="AUH">Abu Dhabi - Abu Dhabi International (AUH), United Arab Emirates</option> 
             <option value="ALC">Alicante (ALC), Spain</option> 
@@ -279,8 +281,31 @@
         </select>
         <!--<input type="date" class="form-control" ng-model="date">-->
         <input ng-model="date" type="date">
-        <input type="text" class="form-control" placeholder="Number of Passengers" ng-model="nop">
-        <button type="submit" class="btn btn-default" ng-click="search()">Submit</button>
+        <select name="nop" class="form-control" ng-model="nop">
+            <option value="" disabled selected hidden>Number of passengers</option>
+            <option value="1">1</option> 
+            <option value="2">2</option> 
+            <option value="3">3</option> 
+            <option value="4">4</option> 
+            <option value="5">5</option>
+            <option value="6">6</option> 
+            <option value="7">7</option> 
+            <option value="8">8</option> 
+            <option value="9">9</option>
+            <option value="10">10</option> 
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option> 
+            <option value="14">14</option> 
+            <option value="15">15</option> 
+            <option value="16">16</option>
+            <option value="17">17</option> 
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option> 
+            <option value="na" disabled selected>More </option> 
+        </select>
+        <button type="submit" class="btn btn-default" ng-click="search()">Search</button>
     </div>
 </form>
 
@@ -297,14 +322,14 @@
 </thead>
 <tbody>
     <tr ng-repeat="data in data">
-            <td>{{data.airline}} </td>
-             <td>{{data.numberOfSeats}} </td>
-            <td>{{data.date}} </td>
-            <td>{{data.totalPrice}} </td>
-            <td>{{data.flightID}} </td>
-            <td>{{data.traveltime}} </td>       
-            <td>{{data.origin}} </td>
-            <td>{{data.destination}} </td>
-        </tr>
+        <td>{{data.airline}} </td>
+        <td>{{data.numberOfSeats}} </td>
+        <td>{{data.date}} </td>
+        <td>{{data.totalPrice}} </td>
+        <td>{{data.flightID}} </td>
+        <td>{{data.traveltime}} </td>       
+        <td>{{data.origin}} </td>
+        <td>{{data.destination}} </td>
+    </tr>
 </tbody>
 </table>
