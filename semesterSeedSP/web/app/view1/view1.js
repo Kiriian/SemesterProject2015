@@ -13,23 +13,35 @@ angular.module('myApp.view1', ['ngRoute'])
 
         .controller('View1Ctrl', function ($scope, $http)
         {
-            
+
             $scope.search = function () {
 
                 var baseUrl = 'api/flightinfo/';
-                var searchDate= $scope.date.toISOString();
-             
+                var year = $scope.date.getFullYear();
+                var month = $scope.date.getMonth();
+                var day = $scope.date.getDate();
+                $scope.newDate = new Date(year, month, day, 1);
 
-                if ($scope.destination !== "null")
+
+                var searchDate = $scope.newDate.toISOString();
+
+
+                if ($scope.destination !== "null" )
                 {
-                    var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
+                    if ($scope.origin !== $scope.destination)
+                    {
+                        var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
+                    }else
+                    {
+                        $scope.error="hej";
+                    }
                 } else
                 {
                     var attributes = $scope.origin + "/" + searchDate + "/" + $scope.nop;
                 }
 
                 var url = baseUrl + attributes;
-                
+
                 $http.get(url).then(function successCallBack(res) {
                     $scope.data = res.data;
                 }, function errorCallBack(res) {
