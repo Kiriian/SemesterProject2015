@@ -6,6 +6,7 @@
 package facades;
 
 import Util.GetFlight;
+import deploy.DeploymentConfiguration;
 import entity.Flight;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class RequestFacade
 {
 
     private List<String> urls;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
     public List<String> getAirlines()
     {
