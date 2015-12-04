@@ -9,7 +9,7 @@
     <properties>
       <!-- REPLACE ALL THIS WITH INFO FOR YOUR OWN DB -->
       <properties>
-        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/test?zeroDateTimeBehavior=convertToNull"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull"/>
         <property name="javax.persistence.jdbc.user" value="ca2"/>
         <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
         <property name="javax.persistence.jdbc.password" value="ca2"/>

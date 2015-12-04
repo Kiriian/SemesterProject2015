@@ -18,8 +18,6 @@ import javax.persistence.Id;
 public class Airline
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String url;
 
     public Airline()
@@ -30,18 +28,7 @@ public class Airline
     {
         this.url = url;
     }
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public String getUrl()
+  public String getUrl()
     {
         return url;
     }
