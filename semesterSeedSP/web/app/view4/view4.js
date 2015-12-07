@@ -14,6 +14,7 @@ angular.module('myApp.view4', ['ngRoute'])
                         success(function () {
                             $scope.myVar = false;
                             $scope.message = "User created";
+                           
                         })
                         .error(function () {
                             $scope.myVar = true;
