@@ -3,11 +3,15 @@
 angular.module('myApp.view1', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider.when('/view1', {
+                $routeProvider
+                .when('/view1', {
                     templateUrl: 'app/view1/view1.html',
                     controller: 'View1Ctrl',
                     controllerAs: 'ctrl'
-                });
+                })
+                .when('/Reserve/:numberOfSeats/', {templateUrl: 'app/view1/Reserve.html',
+                    controller: 'view1Ctrl',
+                    controllerAs: 'ctrl'});
             }])
 
 
