@@ -11,7 +11,8 @@ package exceptions;
  */
 public class NoSuchFlightFoundException extends Exception 
 {
-    public NoSuchFlightFoundException(String s){
+    public NoSuchFlightFoundException(String s)
+    {
        super(s);
    }
 

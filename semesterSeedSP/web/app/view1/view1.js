@@ -4,14 +4,14 @@ angular.module('myApp.view1', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider
-                .when('/view1', {
-                    templateUrl: 'app/view1/view1.html',
-                    controller: 'View1Ctrl',
-                    controllerAs: 'ctrl'
-                })
-                .when('/Reserve/:numberOfSeats/', {templateUrl: 'app/view1/Reserve.html',
-                    controller: 'view1Ctrl',
-                    controllerAs: 'ctrl'});
+                        .when('/view1', {
+                            templateUrl: 'app/view1/view1.html',
+                            controller: 'View1Ctrl',
+                            controllerAs: 'ctrl'
+                        })
+                        .when('/Reserve/:numberOfSeats/', {templateUrl: 'app/view1/Reserve.html',
+                            controller: 'view1Ctrl',
+                            controllerAs: 'ctrl'});
             }])
 
 
@@ -30,14 +30,14 @@ angular.module('myApp.view1', ['ngRoute'])
                 var searchDate = $scope.newDate.toISOString();
 
 
-                if ($scope.destination !== "null" )
+                if ($scope.destination !== "null")
                 {
                     if ($scope.origin !== $scope.destination)
                     {
                         var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
-                    }else
+                    } else
                     {
-                        $scope.error="Depature airport and destination can not be the same";
+                        $scope.error = "Depature airport and destination can not be the same";
                     }
                 } else
                 {
@@ -51,5 +51,11 @@ angular.module('myApp.view1', ['ngRoute'])
                 }, function errorCallBack(res) {
                     alert("noget gik galt");
                 });
-            };
+            }
+            .controller('ReserveCtrl', function ($scope, $http, $routeParam)
+            {
+                
+            })
+
+
         });

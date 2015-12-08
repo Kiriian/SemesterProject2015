@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import entity.Flight;
+import exceptions.NoSuchFlightFoundException;
 import facades.RequestFacade;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -46,8 +47,9 @@ public class Request
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{airport}/{date}/{numberOfTickets}")
-    public String getJson(@PathParam("airport") String airport, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException
+    public String getJson(@PathParam("airport") String airport, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws NoSuchFlightFoundException, InterruptedException, ExecutionException
     {
+       
         List<Flight> flights = rf.getFlights(airport, date, numberOfTickets);
         JsonArray json = new JsonArray();
         for (Flight f : flights)
@@ -65,13 +67,14 @@ public class Request
         }
         String jsonStr = gson.toJson(json);
         return jsonStr;
+        
     }
 
    @GET
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{airport}/{destination}/{date}/{numberOfTickets}")
-    public String getJson(@PathParam("airport") String airport,@PathParam("destination") String destination, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException
+    public String getJson(@PathParam("airport") String airport,@PathParam("destination") String destination, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
         List<Flight> flights = rf.getFlights(airport, destination, date, numberOfTickets);
         JsonArray json = new JsonArray();

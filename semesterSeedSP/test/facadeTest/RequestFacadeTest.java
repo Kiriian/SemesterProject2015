@@ -6,6 +6,7 @@
 package facadeTest;
 
 import entity.Flight;
+import exceptions.NoSuchFlightFoundException;
 import facades.RequestFacade;
 import java.io.IOException;
 import java.util.List;
@@ -32,7 +33,7 @@ public class RequestFacadeTest
     }
 
     @Test
-    public void getFlightWithoutDestination() throws InterruptedException, ExecutionException
+    public void getFlightWithoutDestination() throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
         rf = new RequestFacade();
         origin = "CPH";
@@ -45,7 +46,7 @@ public class RequestFacadeTest
     }
 
     @Test
-    public void getFlightWithDestination() throws InterruptedException, ExecutionException
+    public void getFlightWithDestination() throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
         rf = new RequestFacade();
         origin = "CPH";

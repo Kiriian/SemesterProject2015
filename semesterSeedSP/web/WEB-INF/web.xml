@@ -4,6 +4,11 @@
 	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
+    <context-param>
+        <description>do only show stacktrace when in debug mode</description>
+        <param-name>debug</param-name>
+        <param-value>true</param-value>
+    </context-param>
   
    <context-param>
         <description>If true,the test users "user", "admin" and "user_admin" is created all with password "test"</description>

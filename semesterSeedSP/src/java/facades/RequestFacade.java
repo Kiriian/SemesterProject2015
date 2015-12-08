@@ -8,6 +8,7 @@ package facades;
 import Util.GetFlight;
 import deploy.DeploymentConfiguration;
 import entity.Flight;
+import exceptions.NoSuchFlightFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -33,7 +34,7 @@ public class RequestFacade
         return urls;
     }
 
-    public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException
+    public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
         String finalUrl;
         urls = getAirlines();
@@ -60,7 +61,7 @@ public class RequestFacade
         return flights;
     }
 
-    public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException
+    public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
         System.out.println("hello?");
         String finalUrl;
