@@ -58,10 +58,21 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
         $scope.flight = MyService.getFlight();
 
         $scope.reservation = {Passengers: []};
-
-        for (var i = 0; i < $scope.flight.numberOfSeats; i++) {
+        for (var i = 0; i < $scope.flight.numberOfSeats-1; i++) {
             $scope.reservation.Passengers.push({});
-        }
+        };
+        
+        $scope.reserveTicket = function ()
+        {
+            var url = 'api/reservation';
+            $scope.reservation.flightID = $scope.flight.flightID;
+            $scope.reservation.numberOfSeats = $scope.flight.numberOfSeats;
+//            $http.get(url, $scope.reservation).then(function successCallBack(res) {
+//                alert(res);
+//            }, function errorCallBack(res) {
+//                alert(res.data);
+//            });
+        };
 
     }]);
 app.factory('MyService', function () {
