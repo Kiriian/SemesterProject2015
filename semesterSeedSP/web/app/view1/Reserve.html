@@ -1,30 +1,58 @@
-<p>Reservation</p>
-
-<table class="table">
-    <thead>
-    <th>Airline</th>
-    <th>Number of Tickets</th>
-    <th>Date</th>
-    <th>Price</th>
-    <th>ID</th>
-    <th>Travel Time</th>
-    <th>Departure Airport</th>
-    <th>Destination Airport</th>
-</thead>
-<tbody>
-    <tr> 
-        <td>test</td>
-         <td ng-bind="flight.airline"></td>
-<!--        <td>{{data.numberOfSeats}} </td>
-        <td>{{data.date}} </td>
-        <td>{{data.totalPrice}} </td>
-        <td>{{data.flightID}} </td>
-        <td>{{data.traveltime}} </td>       
-        <td>{{data.origin}} </td>
-        <td>{{data.destination}} </td>-->
-    </tr>
-</tbody>
-</table>
-<script>
-    console.log("From reserve.html: ");
-</script>
+<h3>Reservation</h3>
+<hr>
+<br>
+<form>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <label for="flightID" class="col-md-2 control-label">FlightID: </label>
+                <div class="col-md-5">
+                    <input type="text" id="flightID" value="{{flight.flightID}}" size="50" class="form-control" readonly/>
+                </div>
+                <br>
+                <br>
+                <br>
+                <label for="numberOfSeats" class="col-md-2 control-label">Number of Passangers: </label>
+                <div class="col-md-5">
+                    <input type="text" name="numberOfSeats" value="{{flight.numberOfSeats}}" size="50" class="form-control" readonly/>
+                </div>
+                <br>
+                <br>
+                <br>
+                <label for="fullName" class="col-md-2 control-label">Full Name: </label>
+                <div class="col-md-5">
+                    <input type="text" name="fullname" value="" size="50" class="form-control" placeholder="Please Enter Your Full Name"/>
+                </div>
+                <br>
+                <br>
+                <br>
+                <label for="phone" class="col-md-2 control-label">Phone: </label>
+                <div class="col-md-5">
+                    <input type="text" name="phone" value="" size="50" class="form-control" placeholder="Please Enter Your Phone Number"/>
+                </div>
+                <br>
+                <br>
+                <br>
+                <label for="email" class="col-md-2 control-label">Email: </label>
+                <div class="col-md-5">
+                    <input type="text" name="email" value="" size="50" class="form-control" placeholder="Please Enter Your Email"/>
+                </div>
+                <br>
+                <br>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr ng-repeat="passenger in reservation.Passengers">
+                            <th>Firstname:<input type="text" value="" size="20" class="form-control" placeholder="Please Enter the Firstname of the Passanger"/></th>
+                            <th>Lastname:<input type="text" value="" size="20" class="form-control" placeholder="Please Enter the Lastname of the Passanger"/></th>
+                        </tr>
+                    </thead>
+                </table>
+                <br>
+                <div class="btn pull-right">
+                <input type="submit" class="btn btn-info" value="Reserve Tickets"> 
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

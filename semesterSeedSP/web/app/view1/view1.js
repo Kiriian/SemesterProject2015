@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.view1', ['ngRoute']);
 
-app.config(['$routeProvider', function ($routeProvider){
+app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
                 .when('/view1', {
                     templateUrl: 'app/view1/view1.html',
@@ -15,9 +15,9 @@ app.config(['$routeProvider', function ($routeProvider){
     }]);
 
 
-app.controller('View1Ctrl', ['MyService','$scope', '$http', function(MyService, $scope, $http){
+app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService, $scope, $http) {
 
-        $scope.search = function (){
+        $scope.search = function () {
 
             var baseUrl = 'api/flightinfo/';
             var year = $scope.date.getFullYear();
@@ -45,34 +45,34 @@ app.controller('View1Ctrl', ['MyService','$scope', '$http', function(MyService, 
 
             var url = baseUrl + attributes;
 
-            $http.get(url).then(function successCallBack(res){
+            $http.get(url).then(function successCallBack(res) {
                 $scope.data = res.data;
-            }, function errorCallBack(res){
+            }, function errorCallBack(res) {
                 alert("noget gik galt");
             });
         };
-        $scope.flight = "kjhkjh";
-        $scope.addFlight = function (data){
+        $scope.addFlight = function (data) {
             MyService.addFlight(data);
-            //console.log(MyService.getList());
-            $scope.flight = MyService.getFlight();
-//            console.log($scope.flight);
-        };
-        $scope.getFlight = function (){
-            //return MyService.getList();
-            
         };
 
+        $scope.flight = MyService.getFlight();
+
+        $scope.reservation = {Passengers: []};
+
+        for (var i = 0; i < $scope.flight.numberOfSeats; i++) {
+            $scope.reservation.Passengers.push({});
+        }
+
     }]);
-app.factory('MyService', function (){
+app.factory('MyService', function () {
 
     var item = {};
     // the factory returns an object, which becomes the API for the service
     return {
-        getFlight: function (){
+        getFlight: function () {
             return item;
         },
-        addFlight: function (data){
+        addFlight: function (data) {
             item = data;
         }
     };
