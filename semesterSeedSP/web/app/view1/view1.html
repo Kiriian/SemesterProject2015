@@ -322,7 +322,7 @@
     <th>Destination Airport</th>
 </thead>
 <tbody>
-    <tr ng-repeat="data in data">
+    <tr ng-repeat="data in data ">
         <td>{{data.airline}} </td>
         <td>{{data.numberOfSeats}} </td>
         <td>{{data.date}} </td>
@@ -332,7 +332,7 @@
         <td>{{data.origin}} </td>
         <td>{{data.destination}} </td>
 
-        <td><a href="#/view1/Reserve/{{data.numberOfSeats}}">Reserve</a></td>
+        <td><a href="#/Reserve" ng-click="addFlight(data)">Reserve</a></td>
     </tr>
 
 

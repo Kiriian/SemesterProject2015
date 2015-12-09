@@ -1,61 +1,83 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+var app = angular.module('myApp.view1', ['ngRoute']);
 
-        .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider
-                        .when('/view1', {
-                            templateUrl: 'app/view1/view1.html',
-                            controller: 'View1Ctrl',
-                            controllerAs: 'ctrl'
-                        })
-                        .when('/Reserve/:numberOfSeats/', {templateUrl: 'app/view1/Reserve.html',
-                            controller: 'view1Ctrl',
-                            controllerAs: 'ctrl'});
-            }])
-
-
-        .controller('View1Ctrl', function ($scope, $http)
-        {
-
-            $scope.search = function () {
-
-                var baseUrl = 'api/flightinfo/';
-                var year = $scope.date.getFullYear();
-                var month = $scope.date.getMonth();
-                var day = $scope.date.getDate();
-                $scope.newDate = new Date(year, month, day, 1);
+app.config(['$routeProvider', function ($routeProvider){
+        $routeProvider
+                .when('/view1', {
+                    templateUrl: 'app/view1/view1.html',
+                    controller: 'View1Ctrl',
+                    controllerAs: 'ctrl'
+                })
+                .when('/Reserve', {templateUrl: 'app/view1/Reserve.html',
+                    controller: 'View1Ctrl',
+                    controllerAs: 'ctrl'});
+    }]);
 
 
-                var searchDate = $scope.newDate.toISOString();
+app.controller('View1Ctrl', ['MyService','$scope', '$http', function(MyService, $scope, $http){
+
+        $scope.search = function (){
+
+            var baseUrl = 'api/flightinfo/';
+            var year = $scope.date.getFullYear();
+            var month = $scope.date.getMonth();
+            var day = $scope.date.getDate();
+            $scope.newDate = new Date(year, month, day, 1);
 
 
-                if ($scope.destination !== "null")
+            var searchDate = $scope.newDate.toISOString();
+
+
+            if ($scope.destination !== "null")
+            {
+                if ($scope.origin !== $scope.destination)
                 {
-                    if ($scope.origin !== $scope.destination)
-                    {
-                        var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
-                    } else
-                    {
-                        $scope.error = "Depature airport and destination can not be the same";
-                    }
+                    var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
                 } else
                 {
-                    var attributes = $scope.origin + "/" + searchDate + "/" + $scope.nop;
+                    $scope.error = "Depature airport and destination can not be the same";
                 }
-
-                var url = baseUrl + attributes;
-
-                $http.get(url).then(function successCallBack(res) {
-                    $scope.data = res.data;
-                }, function errorCallBack(res) {
-                    alert("noget gik galt");
-                });
-            }
-            .controller('ReserveCtrl', function ($scope, $http, $routeParam)
+            } else
             {
-                
-            })
+                var attributes = $scope.origin + "/" + searchDate + "/" + $scope.nop;
+            }
+
+            var url = baseUrl + attributes;
+
+            $http.get(url).then(function successCallBack(res){
+                $scope.data = res.data;
+            }, function errorCallBack(res){
+                alert("noget gik galt");
+            });
+        };
+        $scope.flight = "kjhkjh";
+        $scope.addFlight = function (data){
+            MyService.addFlight(data);
+            //console.log(MyService.getList());
+            $scope.flight = MyService.getFlight();
+//            console.log($scope.flight);
+        };
+        $scope.getFlight = function (){
+            //return MyService.getList();
+            
+        };
+
+    }]);
+app.factory('MyService', function (){
+
+    var item = {};
+    // the factory returns an object, which becomes the API for the service
+    return {
+        getFlight: function (){
+            return item;
+        },
+        addFlight: function (data){
+            item = data;
+        }
+    };
+});
 
 
-        });
+
+        
