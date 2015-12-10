@@ -65,7 +65,8 @@ public class ReservationApi
         r.setUser(user);
         f.saveReservation(r);
         JsonObject responseJson = new JsonObject();
-        responseJson.addProperty("fligthID", r.getFlightID());         
+        responseJson.addProperty("fligthID", r.getFlightID()); 
+        responseJson.addProperty("fligthID", r.getFlightID()); 
         return Response.ok(new Gson().toJson(responseJson)).build();
     }
 }

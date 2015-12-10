@@ -32,7 +32,8 @@ public class ReservationFacade
             em.getTransaction().begin();
             em.persist(r);
             em.getTransaction().commit();
-            return em.find(Reservation.class, r.getFlightID());
+            return (Reservation)em.createQuery("select a from Reservation a where a.user.userName=:userName order by a.id desc").setParameter("userName", r.getUser().getUserName()).setMaxResults(1).getSingleResult();
+                   
         } finally
         {
             em.close();

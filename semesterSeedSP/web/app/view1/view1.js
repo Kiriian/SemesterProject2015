@@ -75,10 +75,10 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
             $scope.reservationData.email = $scope.email;
             alert($scope.reservationData)
             $http.post(url, $scope.reservationData).then(function successCallBack(res) {
-                alert("får vi object object herfra?")
+               
                 alert(res.data);
             }, function errorCallBack(res) {
-                alert("får vi object object herfra - errorcallback?")
+                
                 alert(res);
             });
         };
