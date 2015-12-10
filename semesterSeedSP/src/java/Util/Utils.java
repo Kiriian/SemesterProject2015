@@ -19,7 +19,7 @@ import java.util.logging.SimpleFormatter;
  *
  * @author Pernille
  */
-public class Logfile
+public class Utils
 {
     public static Properties initProperties(String propertyFile)
     {

@@ -6,6 +6,7 @@
 package facades;
 
 import Util.GetFlight;
+import Util.Utils;
 import deploy.DeploymentConfiguration;
 import entity.Flight;
 import exceptions.NoSuchFlightFoundException;
@@ -21,7 +22,6 @@ import javax.persistence.Persistence;
 
 public class RequestFacade
 {
-
     private List<String> urls;
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
@@ -41,7 +41,7 @@ public class RequestFacade
         List<Flight> flights = new ArrayList();
         List<Future<List<Flight>>> list = new ArrayList();
         ExecutorService executor = Executors.newFixedThreadPool(4);
-
+        
         for (String url : urls)
         {
             finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
@@ -87,5 +87,11 @@ public class RequestFacade
             }
         }
         return flights;
+    }
+    public static void main(String[] args)
+    {
+        String loggerFile = "LogFile.txt";
+    
+        Utils.setLogFile(loggerFile, RequestFacade.class.getName());
     }
 }
