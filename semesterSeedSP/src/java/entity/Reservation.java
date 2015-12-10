@@ -115,5 +115,25 @@ public class Reservation implements Serializable
     {
         this.email = email;
     }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public List<Passengers> getPassengers()
+    {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passengers> passengers)
+    {
+        this.passengers = passengers;
+    }
     
 }
