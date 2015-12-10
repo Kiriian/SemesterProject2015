@@ -11,6 +11,9 @@ app.config(['$routeProvider', function ($routeProvider) {
                 })
                 .when('/Reserve', {templateUrl: 'app/view1/Reserve.html',
                     controller: 'View1Ctrl',
+                    controllerAs: 'ctrl'})
+                .when('/Reservation', {templateUrl: 'app/view1/newReservation.html',
+                    controller: 'View1Ctrl',
                     controllerAs: 'ctrl'});
     }]);
 
@@ -51,6 +54,7 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
                 alert("noget gik galt");
             });
         };
+
         $scope.addFlight = function (data) {
             MyService.addFlight(data);
         };
@@ -62,25 +66,33 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
             $scope.reservation.Passengers.push({});
         }
         ;
+
+        $scope.newReservation = {};
         $scope.reservationData = {};
         $scope.reserveTicket = function ()
         {
             var url = 'api/reservation/' + $scope.flight.airline;
+
             $scope.reservationData.flightID = $scope.flight.flightID;
             $scope.reservationData.numberOfSeats = $scope.flight.numberOfSeats;
             $scope.reservationData.ReserveeName = $scope.ReserveeName;
-            $scope.reservationData.phone = $scope.phone;
-            $scope.reservationData.email = $scope.email;
+            $scope.reservationData.ReservePhone = $scope.ReservePhone;
+            $scope.reservationData.ReserveeEmail = $scope.ReserveeEmail;
+            $scope.reservationData.Passengers = $scope.reservation.Passengers;
+
             $http.post(url, $scope.reservationData).then
-            (function successCallBack(res){
-                alert(res.data);
-            },function errorCallBack(res) 
-            {
-                alert(res);
-            });
+                    (function successCallBack(res) {
+                        MyService.addFlight(res.data);
+
+                    }, function errorCallBack(res)
+                    {
+                        alert(res.data);
+                    }
+                    );
         };
 
     }]);
+
 app.factory('MyService', function () {
 
     var item = {};
@@ -94,6 +106,7 @@ app.factory('MyService', function () {
         }
     };
 });
+
 
 
 

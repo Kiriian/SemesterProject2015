@@ -6,6 +6,7 @@
 package rest;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Reservation;
@@ -54,20 +55,35 @@ public class ReservationApi
     {
     }
     
+    private Gson gson;
+    
     @POST
     @Path("{airlineName}")
     @Produces("application/json")
     @Consumes("application/json")
-    public Response getJson(String jsonString, @PathParam("airlineName") String baseUrl) throws MalformedURLException, ProtocolException, IOException
+    public Response getJson(String jsonString, @PathParam("airlineName") String airlineName) throws MalformedURLException, ProtocolException, IOException
     {
+        gson = new Gson();
         ReservationFacade rf = new ReservationFacade();
-        String reservationResponse = checkReservation(baseUrl, jsonString);
+        UserFacade uf= new UserFacade();
+        Reservation r = new Reservation();
         
+        JsonObject temp = new JsonParser().parse(jsonString).getAsJsonObject();
+        JsonArray temp2 = temp.get("Passengers").getAsJsonArray();
+        
+        
+        if (temp2.size() == 0)
+        {
+            JsonObject empty = new JsonObject();
+            temp2.add(empty);
+            temp.add("Passengers", temp2);
+            jsonString = temp.toString();
+        }
+        String baseUrl = rf.getAirlinesByAirlineName(airlineName);
+        String reservationResponse = checkReservation(baseUrl, jsonString);
+        System.out.println(reservationResponse);
         JsonObject json = new JsonParser().parse(reservationResponse).getAsJsonObject();
  
-        UserFacade uf= new UserFacade();
-
-        Reservation r = new Reservation();
         r.setFlightID(json.get("flightID").getAsString());
         r.setOrigin(json.get("Origin").getAsString());
         r.setDestination(json.get("Destination").getAsString());
@@ -86,8 +102,7 @@ public class ReservationApi
     
     public String checkReservation(String baseUrl, String reservation) throws MalformedURLException, ProtocolException, IOException
     {
-        String finalUrl = baseUrl + "/api/flightreservation";
-        
+        String finalUrl = baseUrl + "api/flightreservation";
         URL url = new URL(finalUrl);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setDoOutput(true);
@@ -98,10 +113,10 @@ public class ReservationApi
             out.write(reservation);
         }
 
-        String jsonStr = "";
+        String jsonStr;
         con.getInputStream();
         try (Scanner scan = new Scanner(con.getInputStream())) {
-            jsonStr = null;
+            jsonStr = "";
             while (scan.hasNext()) {
                 jsonStr = jsonStr + scan.nextLine();
             }

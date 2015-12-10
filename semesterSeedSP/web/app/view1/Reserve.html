@@ -35,14 +35,14 @@
                 <br>
                 <label for="phone" class="col-md-2 control-label">Phone: </label>
                 <div class="col-md-5">
-                    <input type="text"  ng-model="phone" name="phone" value="" size="50" class="form-control" placeholder="Please Enter Your Phone Number" required=""/>
+                    <input type="text"  ng-model="ReservePhone" name="phone" value="" size="50" class="form-control" placeholder="Please Enter Your Phone Number" required=""/>
                 </div>
                 <br>
                 <br>
                 <br>
                 <label for="email" class="col-md-2 control-label">Email: </label>
                 <div class="col-md-5">
-                    <input type="text" ng-model="email"name="email" value="" size="50" class="form-control" placeholder="Please Enter Your Email" required=""/>
+                    <input type="text" ng-model="ReserveeEmail"name="email" value="" size="50" class="form-control" placeholder="Please Enter Your Email" required=""/>
                 </div>
                 <br>
                 <br>
@@ -50,15 +50,15 @@
                 <table class="table">
                     <thead>
                         <tr ng-repeat="passenger in reservation.Passengers">
-                            <th>Firstname:<input type="text" value="" size="20" class="form-control" placeholder="Please Enter the Firstname of the Passanger" required=""/></th>
-                            <th>Lastname:<input type="text" value="" size="20" class="form-control" placeholder="Please Enter the Lastname of the Passanger" required=""/></th>
+                            <th>Firstname:<input type="text" value="" size="20" ng-model="passenger.firstName" class="form-control" placeholder="Please Enter the Firstname of the Passanger" required=""/></th>
+                            <th>Lastname:<input type="text" value="" size="20" ng-model="passenger.lastName" class="form-control" placeholder="Please Enter the Lastname of the Passanger" required=""/></th>
                         </tr>
                     </thead>
                 </table>
                 
                 <br>
                 <div class="btn pull-right">
-                <input type="submit" ng-click="reserveTicket()" class="btn btn-info" value="Reserve Tickets"> 
+                    <a href="#/Reservation" ng-click="reserveTicket()" type="button">Reserve Tickets</a>
                 </div>
             </div>
         </div>

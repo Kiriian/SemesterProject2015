@@ -63,7 +63,6 @@ public class RequestFacade
 
     public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
-        System.out.println("hello?");
         String finalUrl;
         urls = getAirlines();
         List<Flight> flights = new ArrayList();
