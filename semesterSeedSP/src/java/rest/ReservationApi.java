@@ -10,8 +10,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Reservation;
 import entity.User;
+import facades.RequestFacade;
 import facades.ReservationFacade;
 import facades.UserFacade;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.List;
+import java.util.Scanner;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -19,6 +28,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
@@ -27,7 +37,7 @@ import javax.ws.rs.core.SecurityContext;
  *
  * @author Pernille
  */
-@Path("reservation")
+@Path("reservation/")
 @RolesAllowed("User")
 
 public class ReservationApi
@@ -43,30 +53,60 @@ public class ReservationApi
     public ReservationApi()
     {
     }
+    
     @POST
+    @Path("{airlineName}")
     @Produces("application/json")
     @Consumes("application/json")
-    public Response getJson(String jsonString)
+    public Response getJson(String jsonString, @PathParam("airlineName") String baseUrl) throws MalformedURLException, ProtocolException, IOException
     {
-        ReservationFacade f = new ReservationFacade();
-        UserFacade uf= new UserFacade();
-        System.out.println(""+ jsonString);
-        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        Reservation r = new Reservation();
-        r.setEmail(json.get("email").getAsString());
-        r.setFlightID(json.get("flightID").getAsString());
-        r.setFullname(json.get("ReserveeName").getAsString());
-        r.setNumberOfSeats(json.get("numberOfSeats").getAsInt());
-        r.setPhone(json.get("phone").getAsString());
+        ReservationFacade rf = new ReservationFacade();
+        String reservationResponse = checkReservation(baseUrl, jsonString);
         
+        JsonObject json = new JsonParser().parse(reservationResponse).getAsJsonObject();
+ 
+        UserFacade uf= new UserFacade();
+
+        Reservation r = new Reservation();
+        r.setFlightID(json.get("flightID").getAsString());
+        r.setOrigin(json.get("Origin").getAsString());
+        r.setDestination(json.get("Destination").getAsString());
+        r.setDato(json.get("Date").getAsString());
+        r.setFlightTime(json.get("FlightTime").getAsInt());
+        r.setNumberOfSeats(json.get("numberOfSeats").getAsInt());
+        r.setReserveeName(json.get("ReserveeName").getAsString());
         String userName = securityContext.getUserPrincipal().getName();
         System.out.println("username"+ userName);
         User user= uf.getUserByUserId(userName);
         r.setUser(user);
-        f.saveReservation(r);
-        JsonObject responseJson = new JsonObject();
-        responseJson.addProperty("fligthID", r.getFlightID()); 
-        responseJson.addProperty("fligthID", r.getFlightID()); 
-        return Response.ok(new Gson().toJson(responseJson)).build();
+        rf.saveReservation(r);
+        
+        return Response.ok(new Gson().toJson(json)).build();
+    }
+    
+    public String checkReservation(String baseUrl, String reservation) throws MalformedURLException, ProtocolException, IOException
+    {
+        String finalUrl = baseUrl + "/api/flightreservation";
+        
+        URL url = new URL(finalUrl);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setDoOutput(true);
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json;");
+        con.setRequestProperty("Accept", "application/json;charset=UTF-8");
+        try (OutputStreamWriter out = new OutputStreamWriter(con.getOutputStream())) {
+            out.write(reservation);
+        }
+
+        String jsonStr = "";
+        con.getInputStream();
+        try (Scanner scan = new Scanner(con.getInputStream())) {
+            jsonStr = null;
+            while (scan.hasNext()) {
+                jsonStr = jsonStr + scan.nextLine();
+            }
+        }
+        
+        return jsonStr;
     }
 }

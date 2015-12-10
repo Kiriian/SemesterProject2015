@@ -21,35 +21,42 @@ import javax.persistence.OneToMany;
 @Entity
 public class Reservation implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String flightID;
-    private String fullname;
+    private String origin;
+    private String destination;
+    private String dato;
+    private int flightTime;
     private int numberOfSeats;
-    private String phone;
-    private String email;
+    private String reserveeName;
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "reservation")
     private List<Passengers> passengers;
-    
-    
-   
- public Reservation()
+
+    public Reservation()
     {
     }
 
-    public Reservation(String flightID, String fullname, int numberOfSeats, String phone, String email)
+    public Reservation(String flightID, String origin, String destination, String dato, int flightTime, int numberOfSeats, String reserveeName, User user, List<Passengers> passengers)
     {
         this.flightID = flightID;
-        this.fullname = fullname;
+        this.origin = origin;
+        this.destination = destination;
+        this.dato = dato;
+        this.flightTime = flightTime;
         this.numberOfSeats = numberOfSeats;
-        this.phone = phone;
-        this.email = email;
+        this.reserveeName = reserveeName;
+        this.user = user;
+        this.passengers = passengers;
     }
- 
+
+    
+    
     public Long getId()
     {
         return id;
@@ -58,12 +65,6 @@ public class Reservation implements Serializable
     public void setId(Long id)
     {
         this.id = id;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "entity.Reservation[ id=" + id + " ]";
     }
 
     public String getFlightID()
@@ -76,14 +77,44 @@ public class Reservation implements Serializable
         this.flightID = flightID;
     }
 
-    public String getFullname()
+    public String getOrigin()
     {
-        return fullname;
+        return origin;
     }
 
-    public void setFullname(String fullname)
+    public void setOrigin(String origin)
     {
-        this.fullname = fullname;
+        this.origin = origin;
+    }
+
+    public String getDestination()
+    {
+        return destination;
+    }
+
+    public void setDestination(String destination)
+    {
+        this.destination = destination;
+    }
+
+    public String getDato()
+    {
+        return dato;
+    }
+
+    public void setDato(String dato)
+    {
+        this.dato = dato;
+    }
+
+    public int getFlightTime()
+    {
+        return flightTime;
+    }
+
+    public void setFlightTime(int flightTime)
+    {
+        this.flightTime = flightTime;
     }
 
     public int getNumberOfSeats()
@@ -96,24 +127,14 @@ public class Reservation implements Serializable
         this.numberOfSeats = numberOfSeats;
     }
 
-    public String getPhone()
+    public String getReserveeName()
     {
-        return phone;
+        return reserveeName;
     }
 
-    public void setPhone(String phone)
+    public void setReserveeName(String reserveeName)
     {
-        this.phone = phone;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
+        this.reserveeName = reserveeName;
     }
 
     public User getUser()
@@ -135,5 +156,6 @@ public class Reservation implements Serializable
     {
         this.passengers = passengers;
     }
+
     
 }

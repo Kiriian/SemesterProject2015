@@ -7,6 +7,7 @@ package facades;
 
 import deploy.DeploymentConfiguration;
 import entity.Reservation;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -23,6 +24,15 @@ public class ReservationFacade
         return emf.createEntityManager();
     }
   
+        public String getAirlinesByAirlineName(String airlineName)
+    {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        String url = (String) em.createQuery("SELECT u.url from Airline u where u.airlineName=:airlineName").setParameter("airlineName", airlineName).getSingleResult();
+        em.getTransaction().commit();
+        return url;
+    }
+    
     public Reservation saveReservation(Reservation r)
     {
         EntityManager em = getEntityManager();

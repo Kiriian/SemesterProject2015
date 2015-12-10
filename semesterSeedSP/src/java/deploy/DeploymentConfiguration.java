@@ -58,7 +58,7 @@ public class DeploymentConfiguration implements ServletContextListener
             both.AddRole(userRole);
             both.AddRole(adminRole);
             
-            Airline a = new Airline("http://angularairline-plaul.rhcloud.com/");
+            Airline a = new Airline("http://angularairline-plaul.rhcloud.com/", "AngularJS Airline");
             
             try
             {

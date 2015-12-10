@@ -19,15 +19,28 @@ public class Airline
 {
     @Id
     private String url;
+    private String airlineName;
 
     public Airline()
     {
     }
 
-    public Airline(String url)
+    public Airline(String url, String airlineName)
     {
         this.url = url;
+        this.airlineName = airlineName;
     }
+
+    public String getAirlineName()
+    {
+        return airlineName;
+    }
+
+    public void setAirlineName(String airlineName)
+    {
+        this.airlineName = airlineName;
+    }
+    
   public String getUrl()
     {
         return url;
