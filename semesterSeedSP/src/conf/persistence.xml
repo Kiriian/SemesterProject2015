@@ -5,6 +5,8 @@
     <class>entity.User</class>
     <class>entity.Role</class>
     <class>entity.Airline</class>
+    <class>entity.Passengers</class>
+    <class>entity.Reservation</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!-- REPLACE ALL THIS WITH INFO FOR YOUR OWN DB -->

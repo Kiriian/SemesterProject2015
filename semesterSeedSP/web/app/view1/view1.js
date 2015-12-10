@@ -61,17 +61,26 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
         for (var i = 0; i < $scope.flight.numberOfSeats-1; i++) {
             $scope.reservation.Passengers.push({});
         };
-        
+        $scope.resData = [];
         $scope.reserveTicket = function ()
         {
             var url = 'api/reservation';
-            $scope.reservation.flightID = $scope.flight.flightID;
-            $scope.reservation.numberOfSeats = $scope.flight.numberOfSeats;
-//            $http.get(url, $scope.reservation).then(function successCallBack(res) {
-//                alert(res);
-//            }, function errorCallBack(res) {
-//                alert(res.data);
-//            });
+           
+            alert($scope.flight.flightID);
+            $scope.resData.flightID = $scope.flight.flightID;
+            $scope.resData.numberOfSeats = $scope.flight.numberOfSeats;
+            $scope.resData.totalPrice = $scope.flight.totalPrice;
+            $scope.resData.ReserveeName = $scope.ReserveeName;
+            $scope.resData.phone = $scope.phone;
+            $scope.resData.email = $scope.email;
+            
+            $http.post(url, $scope.resData).then(function successCallBack(res) {
+                alert("får vi object object herfra?")
+                alert(res.data);
+            }, function errorCallBack(res) {
+                alert("får vi object object herfra - errorcallback?")
+                alert(res);
+            });
         };
 
     }]);

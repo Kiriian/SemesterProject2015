@@ -7,35 +7,42 @@
             <div class="form-group row">
                 <label for="flightID" class="col-md-2 control-label">FlightID: </label>
                 <div class="col-md-5">
-                    <input type="text" id="flightID" value="{{flight.flightID}}" size="50" class="form-control" readonly/>
+                    <input type="text" id="flightID" value="{{flight.flightID}}" size="50" class="form-control"/>
                 </div>
                 <br>
                 <br>
                 <br>
-                <label for="numberOfSeats" class="col-md-2 control-label">Number of Passangers: </label>
+                <label for="numberOfSeats" class="col-md-2 control-label">Number of Passengers: </label>
                 <div class="col-md-5">
-                    <input type="text" name="numberOfSeats" value="{{flight.numberOfSeats}}" size="50" class="form-control" readonly/>
+                    <input type="text" name="numberOfSeats" value="{{flight.numberOfSeats}}" size="50" class="form-control"/>
+                </div>
+                <br>
+                <br>
+                <br>
+                <label for="totalPrice" class="col-md-2 control-label">Total price: </label>
+                <div class="col-md-5">
+                    <input type="text" name="totalPrice" value="{{flight.totalPrice}}" size="50" class="form-control" />
                 </div>
                 <br>
                 <br>
                 <br>
                 <label for="fullName" class="col-md-2 control-label">Full Name: </label>
                 <div class="col-md-5">
-                    <input type="text" name="fullname" value="" size="50" class="form-control" placeholder="Please Enter Your Full Name" required=""/>
+                    <input  type="text" ng-model="ReserveeName" name="fullname" value="" size="50" class="form-control" placeholder="Please Enter Your Full Name" required=""/>
                 </div>
                 <br>
                 <br>
                 <br>
                 <label for="phone" class="col-md-2 control-label">Phone: </label>
                 <div class="col-md-5">
-                    <input type="text" name="phone" value="" size="50" class="form-control" placeholder="Please Enter Your Phone Number" required=""/>
+                    <input type="text"  ng-model="phone" name="phone" value="" size="50" class="form-control" placeholder="Please Enter Your Phone Number" required=""/>
                 </div>
                 <br>
                 <br>
                 <br>
                 <label for="email" class="col-md-2 control-label">Email: </label>
                 <div class="col-md-5">
-                    <input type="text" name="email" value="" size="50" class="form-control" placeholder="Please Enter Your Email" required=""/>
+                    <input type="text" ng-model="email"name="email" value="" size="50" class="form-control" placeholder="Please Enter Your Email" required=""/>
                 </div>
                 <br>
                 <br>
@@ -48,6 +55,7 @@
                         </tr>
                     </thead>
                 </table>
+                
                 <br>
                 <div class="btn pull-right">
                 <input type="submit" ng-click="reserveTicket()" class="btn btn-info" value="Reserve Tickets"> 
