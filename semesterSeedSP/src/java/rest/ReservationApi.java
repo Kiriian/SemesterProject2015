@@ -97,6 +97,7 @@ public class ReservationApi
         r.setUser(user);
         rf.saveReservation(r);
         
+        System.out.println(json.toString());
         return Response.ok(new Gson().toJson(json)).build();
     }
     

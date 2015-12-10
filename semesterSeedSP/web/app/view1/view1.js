@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 
-app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService, $scope, $http) {
+app.controller('View1Ctrl', ['MyService', 'thing', '$scope', '$http', function (MyService, thing, $scope, $http) {
 
         $scope.search = function () {
 
@@ -60,6 +60,7 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
         };
 
         $scope.flight = MyService.getFlight();
+        
 
         $scope.reservation = {Passengers: []};
         for (var i = 0; i < $scope.flight.numberOfSeats - 1; i++) {
@@ -67,7 +68,6 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
         }
         ;
 
-        $scope.newReservation = {};
         $scope.reservationData = {};
         $scope.reserveTicket = function ()
         {
@@ -82,7 +82,7 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
 
             $http.post(url, $scope.reservationData).then
                     (function successCallBack(res) {
-                        MyService.addFlight(res.data);
+                        thing.addThing(res.data);
 
                     }, function errorCallBack(res)
                     {
@@ -90,7 +90,7 @@ app.controller('View1Ctrl', ['MyService', '$scope', '$http', function (MyService
                     }
                     );
         };
-
+        $scope.newReservationData = thing.getThing();
     }]);
 
 app.factory('MyService', function () {
@@ -103,6 +103,22 @@ app.factory('MyService', function () {
         },
         addFlight: function (data) {
             item = data;
+        }
+    };
+});
+
+app.factory('thing', function () {
+
+    var reservation = {};
+    // the factory returns an object, which becomes the API for the service
+    return {
+        getThing: function () {
+            console.log(reservation);
+            return reservation;
+        },
+        addThing: function (data) {
+            reservation = data;
+            console.log(reservation);
         }
     };
 });
