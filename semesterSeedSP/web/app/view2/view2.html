@@ -1,4 +1,23 @@
-<p>This is the partial for view 2.</p>
-<div>
-  <p>Data from server (Users ONLY) <b style="color: darkblue">{{data}}</b></p>
-</div>
+
+<uib-accordion>
+    <uib-accordion-group ng-repeat="reservations in data" heading="{{data.flightID}}" >
+        <table class="table">
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Flight Time</th>
+            <th>Number Of Seats</th>
+            <th>Reserve Name</th>
+            <tr>
+                <td>{{reservations.Origin}}</td>
+                <td>{{reservations.Destination}}</td>
+                <td>{{reservations.Date}}</td>
+                <td>{{reservations.FlightTime}}</td>
+                <td>{{reservations.numberOfSeats}}</td>
+                <td>{{reservations.ReserveeName}}</td>
+            </tr>
+
+        </table>
+    </uib-accordion-group>
+
+</uib-accordion>

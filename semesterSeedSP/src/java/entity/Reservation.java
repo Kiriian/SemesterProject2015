@@ -26,6 +26,7 @@ public class Reservation implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String airline;
     private String flightID;
     private String origin;
     private String destination;
@@ -42,8 +43,9 @@ public class Reservation implements Serializable
     {
     }
 
-    public Reservation(String flightID, String origin, String destination, String dato, int flightTime, int numberOfSeats, String reserveeName, User user, List<Passengers> passengers)
+    public Reservation(String airline, String flightID, String origin, String destination, String dato, int flightTime, int numberOfSeats, String reserveeName, User user, List<Passengers> passengers)
     {
+        this.airline = airline;
         this.flightID = flightID;
         this.origin = origin;
         this.destination = destination;
@@ -55,6 +57,17 @@ public class Reservation implements Serializable
         this.passengers = passengers;
     }
 
+    public String getAirline()
+    {
+        return airline;
+    }
+
+    public void setAirline(String airline)
+    {
+        this.airline = airline;
+    }
+
+    
     
     
     public Long getId()

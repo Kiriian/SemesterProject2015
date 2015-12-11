@@ -18,21 +18,29 @@ import javax.persistence.Persistence;
  */
 public class ReservationFacade
 {
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
+
     EntityManager getEntityManager()
     {
         return emf.createEntityManager();
     }
-  
-        public String getAirlinesByAirlineName(String airlineName)
+
+    public String getAirlinesByAirlineName(String airlineName)
     {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        String url = (String) em.createQuery("SELECT u.url from Airline u where u.airlineName=:airlineName").setParameter("airlineName", airlineName).getSingleResult();
-        em.getTransaction().commit();
-        return url;
+        try
+        {
+            em.getTransaction().begin();
+            String url = (String) em.createQuery("SELECT u.url from Airline u where u.airlineName=:airlineName").setParameter("airlineName", airlineName).getSingleResult();
+            em.getTransaction().commit();
+            return url;
+        } finally
+        {
+            em.close();
+        }
     }
-    
+
     public Reservation saveReservation(Reservation r)
     {
         EntityManager em = getEntityManager();
@@ -42,13 +50,27 @@ public class ReservationFacade
             em.getTransaction().begin();
             em.persist(r);
             em.getTransaction().commit();
-            return (Reservation)em.createQuery("select a from Reservation a where a.user.userName=:userName order by a.id desc").setParameter("userName", r.getUser().getUserName()).setMaxResults(1).getSingleResult();
-                   
+            return (Reservation) em.createQuery("select a from Reservation a where a.user.userName=:userName order by a.id desc").setParameter("userName", r.getUser().getUserName()).setMaxResults(1).getSingleResult();
+
         } finally
         {
             em.close();
         }
     }
-    
-    
+
+    public List<Reservation> getUsersReservations(String userName)
+    {
+       EntityManager em = emf.createEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            List<Reservation> resList = em.createQuery("SELECT r from Reservation r where r.user.userName=:userName").setParameter("userName", userName).getResultList();
+            em.getTransaction().commit();
+            return resList;
+        } finally
+        {
+            em.close();
+        }
+    }
+
 }

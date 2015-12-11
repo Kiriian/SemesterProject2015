@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="a"/>
         <group>
-            <file>file:/C:/Users/Jeanette/Documents/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/java/entity/Reservation.java</file>
-            <file>file:/C:/Users/Jeanette/Documents/NetBeansProjects/SemesterProject2015/semesterSeedSP/web/app/view1/Reserve.html</file>
-            <file>file:/C:/Users/Jeanette/Documents/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/java/rest/ReservationApi.java</file>
-            <file>file:/C:/Users/Jeanette/Documents/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/java/facades/ReservationFacade.java</file>
-            <file>file:/C:/Users/Jeanette/Documents/NetBeansProjects/SemesterProject2015/semesterSeedSP/web/app/view1/view1.js</file>
-            <file>file:/C:/Users/Jeanette/Documents/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/java/entity/Airline.java</file>
+            <file>file:/Users/martamiszczyk/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/conf/persistence.xml</file>
+            <file>file:/Users/martamiszczyk/NetBeansProjects/SemesterProject2015/semesterSeedSP/web/app/view1/Reserve.html</file>
+            <file>file:/Users/martamiszczyk/NetBeansProjects/SemesterProject2015/semesterSeedSP/web/app/view1/view1.js</file>
+            <file>file:/Users/martamiszczyk/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/java/rest/HandleUser.java</file>
+            <file>file:/Users/martamiszczyk/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/java/entity/Reservation.java</file>
+            <file>file:/Users/martamiszczyk/NetBeansProjects/SemesterProject2015/semesterSeedSP/src/java/rest/ReservationApi.java</file>
+            <file>file:/Users/martamiszczyk/NetBeansProjects/SemesterProject2015/semesterSeedSP/web/app/view1/view1.html</file>
         </group>
     </open-files>
 </project-private>

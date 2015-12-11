@@ -47,7 +47,7 @@ public class Request
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{airport}/{date}/{numberOfTickets}")
-    public String getJson(@PathParam("airport") String airport, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws NoSuchFlightFoundException, InterruptedException, ExecutionException
+    public String getInfoRequestToAny(@PathParam("airport") String airport, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws NoSuchFlightFoundException, InterruptedException, ExecutionException
     {
        
         List<Flight> flights = rf.getFlights(airport, date, numberOfTickets);
@@ -74,7 +74,7 @@ public class Request
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{airport}/{destination}/{date}/{numberOfTickets}")
-    public String getJson(@PathParam("airport") String airport,@PathParam("destination") String destination, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
+    public String getInfoRequestToAndFrom(@PathParam("airport") String airport,@PathParam("destination") String destination, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
         List<Flight> flights = rf.getFlights(airport, destination, date, numberOfTickets);
         JsonArray json = new JsonArray();
