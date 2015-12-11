@@ -63,7 +63,7 @@ app.controller('View1Ctrl', ['MyService', 'thing', '$scope', '$http', function (
         
 
         $scope.reservation = {Passengers: []};
-        for (var i = 0; i < $scope.flight.numberOfSeats - 1; i++) {
+        for (var i = 0; i < $scope.flight.numberOfSeats; i++) {
             $scope.reservation.Passengers.push({});
         }
         ;

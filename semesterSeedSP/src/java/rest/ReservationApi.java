@@ -67,21 +67,9 @@ public class ReservationApi
         ReservationFacade rf = new ReservationFacade();
         UserFacade uf= new UserFacade();
         Reservation r = new Reservation();
-        
-        JsonObject temp = new JsonParser().parse(jsonString).getAsJsonObject();
-        JsonArray temp2 = temp.get("Passengers").getAsJsonArray();
-        
-        
-        if (temp2.size() == 0)
-        {
-            JsonObject empty = new JsonObject();
-            temp2.add(empty);
-            temp.add("Passengers", temp2);
-            jsonString = temp.toString();
-        }
+
         String baseUrl = rf.getAirlinesByAirlineName(airlineName);
         String reservationResponse = checkReservation(baseUrl, jsonString);
-        System.out.println(reservationResponse);
         JsonObject json = new JsonParser().parse(reservationResponse).getAsJsonObject();
  
         r.setFlightID(json.get("flightID").getAsString());
@@ -92,7 +80,6 @@ public class ReservationApi
         r.setNumberOfSeats(json.get("numberOfSeats").getAsInt());
         r.setReserveeName(json.get("ReserveeName").getAsString());
         String userName = securityContext.getUserPrincipal().getName();
-        System.out.println("username"+ userName);
         User user= uf.getUserByUserId(userName);
         r.setUser(user);
         rf.saveReservation(r);
