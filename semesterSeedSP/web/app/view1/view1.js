@@ -69,7 +69,6 @@ app.controller('View1Ctrl', ['MyService', '$rootScope', 'factoryThing', '$scope'
         ;
 $scope.newReservationData ={};
         $scope.$on('valueAdded', function (event, factoryThing) {
-            alert("kan den finde ud af det?");
             $scope.newReservationData = factoryThing.getThing();
         });
         

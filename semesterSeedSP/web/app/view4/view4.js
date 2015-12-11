@@ -13,6 +13,7 @@ angular.module('myApp.view4', ['ngRoute'])
                 $http.post('api/saveUser', $scope.user).
                         success(function () {
                             $scope.myVar = false;
+//                            $scope.userForm.$setPristine();
                             $scope.message = "User created";
                            
                         })

@@ -170,5 +170,8 @@ public class Reservation implements Serializable
         this.passengers = passengers;
     }
 
-    
+    public void addPassengers(Passengers p)
+    {
+        passengers.add(p);
+    }
 }

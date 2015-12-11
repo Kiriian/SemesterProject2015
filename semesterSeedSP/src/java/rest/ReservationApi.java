@@ -7,6 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Passengers;
@@ -21,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.annotation.security.RolesAllowed;
@@ -84,7 +86,15 @@ public class ReservationApi
         r.setReserveeName(json.get("ReserveeName").getAsString());
         String userName = securityContext.getUserPrincipal().getName();
         User user = uf.getUserByUserId(userName);
-//        List<Passengers> passengers = json.get("Passengers").getAsJsonArray();
+        List<Passengers> passengers = new ArrayList<>();
+        Passengers p = new Passengers();
+        JsonArray jp = json.getAsJsonArray("Passengers");
+        for (JsonElement jp1 : jp)
+        {
+            p.setFirstName(jp1.getAsJsonObject().get("firstName").getAsString());
+            p.setLastName(jp1.getAsJsonObject().get("lastName").getAsString());
+            r.addPassengers(p);
+        }
         r.setUser(user);
         rf.saveReservation(r);
 
