@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 
-app.controller('View1Ctrl', ['MyService', 'factoryThing', '$scope', '$http', function (MyService, factoryThing, $scope, $http) {
+app.controller('View1Ctrl', ['MyService', '$rootScope', 'factoryThing', '$scope', '$http', function (MyService, $rootScope, factoryThing, $scope, $http) {
 
         $scope.search = function () {
 
@@ -60,14 +60,19 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$scope', '$http', fun
         };
 
         $scope.flight = MyService.getFlight();
-        
+
 
         $scope.reservation = {Passengers: []};
         for (var i = 0; i < $scope.flight.numberOfSeats; i++) {
             $scope.reservation.Passengers.push({});
         }
         ;
-
+$scope.newReservationData ={};
+        $scope.$on('valueAdded', function (event, factoryThing) {
+            alert("kan den finde ud af det?");
+            $scope.newReservationData = factoryThing.getThing();
+        });
+        
         $scope.reservationData = {};
         $scope.reserveTicket = function ()
         {
@@ -82,7 +87,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$scope', '$http', fun
 
             $http.post(url, $scope.reservationData).then
                     (function successCallBack(res) {
-                        factoryThing.addThing(res.data);
+                        factoryThing.addThing(res.data, $rootScope);
 
                     }, function errorCallBack(res)
                     {
@@ -90,7 +95,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$scope', '$http', fun
                     }
                     );
         };
-        $scope.newReservationData = factoryThing.getThing();
+
     }]);
 
 app.factory('MyService', function () {
@@ -103,6 +108,7 @@ app.factory('MyService', function () {
         },
         addFlight: function (data) {
             item = data;
+            
         }
     };
 });
@@ -116,8 +122,9 @@ app.factory('factoryThing', function () {
             console.log(reservation);
             return reservation;
         },
-        addThing: function (data) {
+        addThing: function (data, $rootScope) {
             reservation = data;
+            $rootScope.$broadcast('valueAdded', reservation);
             console.log(reservation);
         }
     };
