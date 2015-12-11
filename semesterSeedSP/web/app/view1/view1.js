@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 
-app.controller('View1Ctrl', ['MyService', '$rootScope', 'factoryThing', '$scope', '$http', function (MyService, $rootScope, factoryThing, $scope, $http) {
+app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope', '$http', function (MyService, factoryThing, $rootScope, $scope, $http) {
 
         $scope.search = function () {
 
@@ -69,7 +69,7 @@ app.controller('View1Ctrl', ['MyService', '$rootScope', 'factoryThing', '$scope'
         ;
         
         $scope.newReservationData = {};
-        $scope.$on('valueAdded', function (event, factoryThing) {
+        $scope.$on('set', function () {
             $scope.newReservationData = factoryThing.getThing();
         });
 
@@ -113,7 +113,7 @@ app.factory('MyService', function () {
     };
 });
 
-app.factory('factoryThing', function () {
+app.factory('factoryThing', function ($rootScope) {
 
     var reservation = {};
     // the factory returns an object, which becomes the API for the service
@@ -122,9 +122,9 @@ app.factory('factoryThing', function () {
             console.log(reservation);
             return reservation;
         },
-        addThing: function (data, $rootScope) {
+        addThing: function (data) {
             reservation = data;
-            $rootScope.$broadcast('valueAdded', reservation);
+            $rootScope.$broadcast('set', reservation);
             console.log(reservation);
         }
     };

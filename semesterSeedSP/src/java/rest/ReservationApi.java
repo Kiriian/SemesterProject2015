@@ -165,7 +165,6 @@ public class ReservationApi
             json.add(jo);
             
         }
-        System.out.println("json!!!!!!!!!!!!!!!!!!!!!!!" + json.toString());
         String jsonStr = json.toString();
         return jsonStr;
 

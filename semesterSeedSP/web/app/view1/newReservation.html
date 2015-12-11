@@ -19,10 +19,10 @@
     <h5>Reservee Name: {{newReservationData.ReserveeName}}</h5>
     <br>
     <div ng-repeat="passengers in newReservationData.Passengers">
-        <h5>Name of Other Passengers:</h3>
-        <h5>Firstname: {{newReservationData.firstName}}</h5>
+        <h4>Name of Other Passengers:</h4>
+        <h5>Firstname: {{passengers.firstName}}</h5>
         <br>
-        <h5>Lastname: {{newReservationData.lastName}}</h5>
+        <h5>Lastname: {{passengers.lastName}}</h5>
         <br>
     </div>
 </div>
