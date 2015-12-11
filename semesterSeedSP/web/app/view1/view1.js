@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 
-app.controller('View1Ctrl', ['MyService', 'thing', '$scope', '$http', function (MyService, thing, $scope, $http) {
+app.controller('View1Ctrl', ['MyService', 'factoryThing', '$scope', '$http', function (MyService, factoryThing, $scope, $http) {
 
         $scope.search = function () {
 
@@ -82,7 +82,7 @@ app.controller('View1Ctrl', ['MyService', 'thing', '$scope', '$http', function (
 
             $http.post(url, $scope.reservationData).then
                     (function successCallBack(res) {
-                        thing.addThing(res.data);
+                        factoryThing.addThing(res.data);
 
                     }, function errorCallBack(res)
                     {
@@ -90,7 +90,7 @@ app.controller('View1Ctrl', ['MyService', 'thing', '$scope', '$http', function (
                     }
                     );
         };
-        $scope.newReservationData = thing.getThing();
+        $scope.newReservationData = factoryThing.getThing();
     }]);
 
 app.factory('MyService', function () {
@@ -107,7 +107,7 @@ app.factory('MyService', function () {
     };
 });
 
-app.factory('thing', function () {
+app.factory('factoryThing', function () {
 
     var reservation = {};
     // the factory returns an object, which becomes the API for the service
