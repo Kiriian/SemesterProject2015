@@ -10,11 +10,15 @@ angular.module('myApp.view2', ['ngRoute'])
           }])
 
         .controller('View2Ctrl', function ($http, $scope) {
+            $scope.test = "test";
+
           $http({
             method: 'GET',
             url: 'api/reservation/'
           }).then(function successCallback(res) {
-            $scope.data = res.data.message;
+              console.log(res.data[0].Passengers[0]);
+            $scope.data = res.data[0];
+            console.log($scope.data);
           }, function errorCallback(res) {
             $scope.error = res.status + ": "+ res.data.statusText;
           });

@@ -86,19 +86,20 @@ public class ReservationApi
         r.setReserveeName(json.get("ReserveeName").getAsString());
         String userName = securityContext.getUserPrincipal().getName();
         User user = uf.getUserByUserId(userName);
+        r.setUser(user);
         List<Passengers> passengers = new ArrayList<>();
-        Passengers p = new Passengers();
         JsonArray jp = json.getAsJsonArray("Passengers");
         for (JsonElement jp1 : jp)
         {
+            Passengers p = new Passengers();
             p.setFirstName(jp1.getAsJsonObject().get("firstName").getAsString());
             p.setLastName(jp1.getAsJsonObject().get("lastName").getAsString());
-            r.addPassengers(p);
+            p.setReservation(r);
+            passengers.add(p);
         }
-        r.setUser(user);
-        rf.saveReservation(r);
+        
+        rf.saveReservation(r, passengers);
 
-        System.out.println(json.toString());
         return Response.ok(new Gson().toJson(json)).build();
     }
 
@@ -152,7 +153,7 @@ public class ReservationApi
             jo.addProperty("ReserveeName", r.getReserveeName());
 
             JsonArray json1 = new JsonArray();
-            List<Passengers> pasList = r.getPassengers();
+            List<Passengers> pasList = rf.getPassengersByReservationID(r.getId());
             for (Passengers p : pasList)
             {
                 JsonObject jo2 = new JsonObject();
@@ -165,7 +166,7 @@ public class ReservationApi
             
         }
         System.out.println("json!!!!!!!!!!!!!!!!!!!!!!!" + json.toString());
-        String jsonStr = gson.toJson(json);
+        String jsonStr = json.toString();
         return jsonStr;
 
     }

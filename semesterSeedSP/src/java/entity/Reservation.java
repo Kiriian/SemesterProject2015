@@ -170,8 +170,11 @@ public class Reservation implements Serializable
         this.passengers = passengers;
     }
 
-    public void addPassengers(Passengers p)
+    @Override
+    public String toString()
     {
-        passengers.add(p);
+        return "Reservation{" + "id=" + id + ", airline=" + airline + ", flightID=" + flightID + ", origin=" + origin + ", destination=" + destination + ", dato=" + dato + ", flightTime=" + flightTime + ", numberOfSeats=" + numberOfSeats + ", reserveeName=" + reserveeName + ", user=" + user + ", passengers=" + passengers + '}';
     }
+    
+    
 }

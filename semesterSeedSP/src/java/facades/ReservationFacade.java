@@ -6,6 +6,7 @@
 package facades;
 
 import deploy.DeploymentConfiguration;
+import entity.Passengers;
 import entity.Reservation;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -41,7 +42,7 @@ public class ReservationFacade
         }
     }
 
-    public Reservation saveReservation(Reservation r)
+    public Reservation saveReservation(Reservation r, List<Passengers> passengers)
     {
         EntityManager em = getEntityManager();
 //        
@@ -49,6 +50,10 @@ public class ReservationFacade
         {
             em.getTransaction().begin();
             em.persist(r);
+            for (Passengers passenger : passengers)
+            {
+                em.persist(passenger);
+            }
             em.getTransaction().commit();
             return (Reservation) em.createQuery("select a from Reservation a where a.user.userName=:userName order by a.id desc").setParameter("userName", r.getUser().getUserName()).setMaxResults(1).getSingleResult();
 
@@ -73,4 +78,18 @@ public class ReservationFacade
         }
     }
 
+    public List<Passengers> getPassengersByReservationID(long reservationID)
+    {
+       EntityManager em = emf.createEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            List<Passengers> pasList = em.createQuery("SELECT p from Passengers p where p.reservation.id=:reservationID").setParameter("reservationID", reservationID).getResultList();
+            em.getTransaction().commit();
+            return pasList;
+        } finally
+        {
+            em.close();
+        }
+    }
 }

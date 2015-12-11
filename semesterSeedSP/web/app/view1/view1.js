@@ -67,11 +67,12 @@ app.controller('View1Ctrl', ['MyService', '$rootScope', 'factoryThing', '$scope'
             $scope.reservation.Passengers.push({});
         }
         ;
-$scope.newReservationData ={};
+        
+        $scope.newReservationData = {};
         $scope.$on('valueAdded', function (event, factoryThing) {
             $scope.newReservationData = factoryThing.getThing();
         });
-        
+
         $scope.reservationData = {};
         $scope.reserveTicket = function ()
         {
@@ -107,7 +108,7 @@ app.factory('MyService', function () {
         },
         addFlight: function (data) {
             item = data;
-            
+
         }
     };
 });

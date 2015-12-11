@@ -1,23 +1,36 @@
-
 <uib-accordion>
-    <uib-accordion-group ng-repeat="reservations in data" heading="{{data.flightID}}" >
+    <uib-accordion-group heading="{{data.flightID}}" >
         <table class="table">
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Date</th>
-            <th>Flight Time</th>
-            <th>Number Of Seats</th>
-            <th>Reserve Name</th>
             <tr>
-                <td>{{reservations.Origin}}</td>
-                <td>{{reservations.Destination}}</td>
-                <td>{{reservations.Date}}</td>
-                <td>{{reservations.FlightTime}}</td>
-                <td>{{reservations.numberOfSeats}}</td>
-                <td>{{reservations.ReserveeName}}</td>
+                <th>Airline</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Date</th>
+                <th>Flight Time</th>
+                <th>Number Of Seats</th>
+                <th>Reserve Name</th>
+            <tr>
+            <tr>
+                <td>{{data.airline}}</td>
+                <td>{{data.origin}}</td>
+                <td>{{data.destination}}</td>
+                <td>{{data.date}}</td>
+                <td>{{data.flightTime}}</td>
+                <td>{{data.numberOfSeats}}</td>
+                <td>{{data.ReserveeName}}</td>
             </tr>
-
+            <div class="accordion-inner" ng-repeat="passenger in data.Passengers">
+                <table>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>  
+                    </tr>
+                    <tr>
+                        <td>{{passenger.firstName}}</td>
+                        <td>{{passenger.lastName}}</td>
+                    </tr>
+                </table>
+            </div>
         </table>
     </uib-accordion-group>
-
 </uib-accordion>

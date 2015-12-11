@@ -79,4 +79,9 @@ public class Passengers implements Serializable
         this.reservation = reservation;
     }
 
+    @Override
+    public String toString()
+    {
+        return "Passengers{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", reservation=" + reservation + '}';
+    }
 }
