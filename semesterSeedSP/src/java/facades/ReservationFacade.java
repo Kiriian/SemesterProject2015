@@ -28,7 +28,7 @@ public class ReservationFacade
     {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        String url = (String) em.createQuery("SELECT u.url from Airline u where u.airlineName=:airlineName").setParameter("airlineName", airlineName).getSingleResult();
+        String url = (String) em.createQuery("SELECT u.url from Airline u where u.airlineName=:airlineName").setParameter("airlineName", airlineName).setMaxResults(1).getSingleResult();
         em.getTransaction().commit();
         return url;
     }
