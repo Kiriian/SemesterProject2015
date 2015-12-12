@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Passengers;
 import entity.Reservation;
+import entity.Role;
 import entity.User;
 import facades.RequestFacade;
 import facades.ReservationFacade;
@@ -43,7 +44,10 @@ import javax.ws.rs.core.SecurityContext;
  * @author Pernille
  */
 @Path("reservation/")
-@RolesAllowed("User")
+@RolesAllowed(
+{
+    "User", "Admin"
+})
 
 public class ReservationApi
 {
@@ -97,7 +101,7 @@ public class ReservationApi
             p.setReservation(r);
             passengers.add(p);
         }
-        
+
         rf.saveReservation(r, passengers);
 
         return Response.ok(new Gson().toJson(json)).build();
@@ -138,7 +142,14 @@ public class ReservationApi
     {
         ReservationFacade rf = new ReservationFacade();
         String userName = securityContext.getUserPrincipal().getName();
-        List<Reservation> resList = rf.getUsersReservations(userName);
+        List<Reservation> resList = null; 
+        if (securityContext.isUserInRole("Admin") == true)
+        {
+            //Vi skal have lavet metoden...
+        } else
+        {
+            resList = rf.getUsersReservations(userName);
+        }
         JsonArray json = new JsonArray();
         for (Reservation r : resList)
         {
@@ -163,7 +174,7 @@ public class ReservationApi
             }
             jo.add("Passengers", json1);
             json.add(jo);
-            
+
         }
         String jsonStr = json.toString();
         return jsonStr;

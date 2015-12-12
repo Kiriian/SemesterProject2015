@@ -23,6 +23,7 @@ public class ApplicationConfig extends Application {
   private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(exceptions.NoSuchFlightFoundExceptionMapper.class);
         resources.add(rest.Admin.class);
+        resources.add(rest.Authentication.class);
         resources.add(rest.HandleUser.class);
         resources.add(rest.Request.class);
         resources.add(rest.ReservationApi.class);

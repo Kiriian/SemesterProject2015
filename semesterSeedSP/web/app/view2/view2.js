@@ -12,13 +12,18 @@ angular.module('myApp.view2', ['ngRoute'])
         .controller('View2Ctrl', function ($http, $scope) {
             $scope.test = "test";
 
+            $scope.data = [];
           $http({
             method: 'GET',
             url: 'api/reservation/'
           }).then(function successCallback(res) {
-              console.log(res.data[0]);
-            $scope.data = res.data[0];
-            console.log($scope.data);
+              console.log(res.data[0].Passengers[0]);
+              
+              for (var i = 0; i < res.data.length; i++)
+              {
+                  $scope.data.push(res.data[i]);
+              }
+            console.log($scope.data[0].flightID);
           }, function errorCallback(res) {
             $scope.error = res.status + ": "+ res.data.statusText;
           });

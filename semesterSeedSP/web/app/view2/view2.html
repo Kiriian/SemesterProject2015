@@ -1,37 +1,25 @@
-<p>hello: {{data.ReservationInfo[0].flightID}}</p>
 <uib-accordion>
-    <uib-accordion-group heading="{{data.flightID}}" >
-        <table class="table">
-            <tr>
-                <th>Airline</th>
-                <th>Origin</th>
-                <th>Destination</th>
-                <th>Date</th>
-                <th>Flight Time</th>
-                <th>Number Of Seats</th>
-                <th>Reserve Name</th>
-            <tr>
-            <tr>
-                <td>{{data.airline}}</td>
-                <td>{{data.origin}}</td>
-                <td>{{data.destination}}</td>
-                <td>{{data.date}}</td>
-                <td>{{data.flightTime}}</td>
-                <td>{{data.numberOfSeats}}</td>
-                <td>{{data.ReserveeName}}</td>
-            </tr>
-            <div class="accordion-inner" ng-repeat="passenger in data.Passengers">
-                <table>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>  
-                    </tr>
-                    <tr>
-                        <td>{{passenger.firstName}}</td>
-                        <td>{{passenger.lastName}}</td>
-                    </tr>
-                </table>
-            </div>
-        </table>
+    <uib-accordion-group ng-repeat="data in data" heading="{{data.flightID}}" >
+            <h5>Airline: {{data.airline}}</h5>
+    <br>
+    <h5>FlightID: {{data.flightID}}</h5>
+    <br>
+    <h5>Origin: {{data.origin}}</h5>
+    <br>
+    <h5>Destination: {{data.destination}}</h5>
+    <br>
+    <h5>Date: {{data.date}}</h5>
+    <br>
+    <h5>Flight Time (min): {{data.flightTime}}</h5>
+    <br>
+    <h5>Number of Seats: {{data.numberOfSeats}}</h5>
+    <br>
+    <h5>Reservee Name: {{data.ReserveeName}}</h5>
+    <br>
+    <h4>Name of Passengers:</h4>
+    <div ng-repeat="passengers in data.Passengers">
+        <h5>Full Name: {{passengers.firstName}} {{passengers.lastName}}</h5>
+        <br>
+    </div>
     </uib-accordion-group>
 </uib-accordion>

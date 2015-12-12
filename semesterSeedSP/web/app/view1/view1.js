@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     }]);
 
 
-app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope', '$http', function (MyService, factoryThing, $rootScope, $scope, $http) {
+app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope', '$http', '$window', function (MyService, factoryThing, $rootScope, $scope, $http, $window) {
 
         $scope.search = function () {
 
@@ -50,13 +50,20 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
 
             $http.get(url).then(function successCallBack(res) {
                 $scope.data = res.data;
+                
             }, function errorCallBack(res) {
                 alert("noget gik galt");
+                $scope.data = null;
             });
         };
 
         $scope.addFlight = function (data) {
-            MyService.addFlight(data);
+            $http.get("api/demo").then(function successCallBack(res){
+                MyService.addFlight(data);
+                $window.location.href = '#/Reserve';
+            }, function errorCallBack(res){
+               
+            });
         };
 
         $scope.flight = MyService.getFlight();

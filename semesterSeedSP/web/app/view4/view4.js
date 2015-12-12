@@ -15,6 +15,7 @@ angular.module('myApp.view4', ['ngRoute'])
                             $scope.myVar = false;
 //                            $scope.userForm.$setPristine();
                             $scope.message = "User created";
+                            $scope.user = null;
                            
                         })
                         .error(function () {
