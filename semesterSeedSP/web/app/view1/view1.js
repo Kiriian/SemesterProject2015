@@ -52,7 +52,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
                 $scope.data = res.data;
                 
             }, function errorCallBack(res) {
-                alert("noget gik galt");
+                $scope.error = "There are no available flights"
                 $scope.data = null;
             });
         };

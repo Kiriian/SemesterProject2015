@@ -92,4 +92,19 @@ public class ReservationFacade
             em.close();
         }
     }
+
+    public List<Reservation> getAllReservations()
+    {
+               EntityManager em = emf.createEntityManager();
+        try
+        {
+            em.getTransaction().begin();
+            List<Reservation> resList = em.createQuery("SELECT r from Reservation r").getResultList();
+            em.getTransaction().commit();
+            return resList;
+        } finally
+        {
+            em.close();
+        }
+    }
 }

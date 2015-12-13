@@ -145,7 +145,7 @@ public class ReservationApi
         List<Reservation> resList = null; 
         if (securityContext.isUserInRole("Admin") == true)
         {
-            //Vi skal have lavet metoden...
+            resList = rf.getAllReservations();
         } else
         {
             resList = rf.getUsersReservations(userName);
