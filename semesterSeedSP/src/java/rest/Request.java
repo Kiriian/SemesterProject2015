@@ -27,7 +27,7 @@ import javax.ws.rs.PUT;
  *
  * @author Pernille
  */
-@Path("flightinfo/")
+@Path("request/")
 public class Request
 {
 
@@ -66,6 +66,7 @@ public class Request
             json.add(jo);
         }
         String jsonStr = gson.toJson(json);
+        System.out.println(jsonStr);
         return jsonStr;
         
     }

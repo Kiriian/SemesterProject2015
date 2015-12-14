@@ -5,23 +5,32 @@
  */
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Pernille
  */
-public class Flight
+@Entity
+public class Flight implements Serializable
 {
+    @Id
+    private String fligthID;
     private String airlineName;
     private String date;
     private int numberOfSeats;
     private double totalPrice;
-    private String fligthID;
     private int traveltime;
     private String destination;
     private String origin;
 
+    public Flight()
+    {
+    }
+    
     public Flight(String airlineName, String date, int numberOfSeats, double totalPrice, String fligthID, int traveltime, String destination, String origin)
     {
         this.airlineName = airlineName;

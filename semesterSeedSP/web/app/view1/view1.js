@@ -22,7 +22,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
         $scope.predicate = "totalPrice";
         $scope.search = function () {
 
-            var baseUrl = 'api/flightinfo/';
+            var baseUrl = 'api/request/';
             var year = $scope.date.getFullYear();
             var month = $scope.date.getMonth();
             var day = $scope.date.getDate();
