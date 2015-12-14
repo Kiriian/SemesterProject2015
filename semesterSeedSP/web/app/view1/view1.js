@@ -19,7 +19,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 
 app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope', '$http', '$window', function (MyService, factoryThing, $rootScope, $scope, $http, $window) {
-
+        $scope.predicate = "totalPrice";
         $scope.search = function () {
 
             var baseUrl = 'api/flightinfo/';

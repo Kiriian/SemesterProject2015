@@ -336,14 +336,14 @@
     <th>Airline</th>
     <th>Number of Tickets</th>
     <th>Date</th>
-    <th>Price</th>
+    <td><a href="" ng-click="predicate = 'totalPrice'; reverse=!reverse">Price</a></td>
     <th>ID</th>
     <th>Travel Time</th>
     <th>Departure Airport</th>
     <th>Destination Airport</th>
 </thead>
 <tbody>
-    <tr ng-repeat="data in data">
+    <tr ng-repeat="data in data | orderBy:predicate:reverse">
         <td>{{data.airline}} </td>
         <td>{{data.numberOfSeats}} </td>
         <td>{{data.date}} </td>
