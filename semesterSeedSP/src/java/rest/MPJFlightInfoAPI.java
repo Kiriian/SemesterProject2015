@@ -17,25 +17,25 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("flightinfo/")
-public class MPJFlightInfoAPI 
+public class MPJFlightInfoAPI
 {
+
     MPJRequest mpj = new MPJRequest();
     private Gson gson = new Gson();
-  
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("{from}/{date}/{numTickets}")
-  public String searchFlightsToAll(@PathParam("from")String airport, @PathParam("date")String date, @PathParam("numTickets")int numberOfTickets )
-  {
-    List<Flight> flights = mpj.getFlights(airport, date, numberOfTickets);
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{from}/{date}/{numTickets}")
+    public String searchFlightsToAll(@PathParam("from") String airport, @PathParam("date") String date, @PathParam("numTickets") int numberOfTickets)
+    {
+        List<Flight> flights = mpj.getFlights(airport, date, numberOfTickets);
         JsonArray json = new JsonArray();
         JsonObject flightcollection = new JsonObject();
-        
         flightcollection.addProperty("airline", "MPJ Air");
         for (Flight f : flights)
         {
-            JsonObject jo = new JsonObject(); 
+            JsonObject jo = new JsonObject();
             jo.addProperty("date", f.getDate());
             jo.addProperty("numberOfSeats", f.getNumberOfSeats());
             jo.addProperty("totalPrice", f.getTotalPrice());
@@ -43,11 +43,11 @@ public class MPJFlightInfoAPI
             jo.addProperty("traveltime", f.getTraveltime());
             jo.addProperty("destination", f.getDestination());
             jo.addProperty("origin", f.getOrigin());
-            json.add(json);
+            json.add(jo);
         }
         flightcollection.add("flights", json);
-        String jsonStr = gson.toJson(json);
+        String jsonStr = gson.toJson(flightcollection);
         return jsonStr;
-  }
- 
+    }
+
 }
