@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import entity.Flight;
+import entity.LoggerSearchData;
 import exceptions.NoSuchFlightFoundException;
 import facades.RequestFacade;
 import java.util.List;
@@ -51,6 +52,8 @@ public class Request
     {
        
         List<Flight> flights = rf.getFlights(airport, date, numberOfTickets);
+        LoggerSearchData lsd = new LoggerSearchData(airport, "Any", date);
+        rf.logSearchCritieria(lsd);
         JsonArray json = new JsonArray();
         for (Flight f : flights)
         {
@@ -79,6 +82,8 @@ public class Request
     {
         List<Flight> flights = rf.getFlights(airport, destination, date, numberOfTickets);
         JsonArray json = new JsonArray();
+        LoggerSearchData lsd = new LoggerSearchData(airport, destination, date);
+        rf.logSearchCritieria(lsd);
         for (Flight f : flights)
         {
             JsonObject jo = new JsonObject();

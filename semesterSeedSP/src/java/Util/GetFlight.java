@@ -7,15 +7,12 @@ package Util;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
+import entity.Airline;
 import entity.Flight;
 import exceptions.NoSuchFlightFoundException;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -102,6 +99,7 @@ public class GetFlight implements Callable<List<Flight>>
             return flights;
         } catch (Exception e)
         {
+            e.printStackTrace();
             throw new NoSuchFlightFoundException("No flights available");
             
         }

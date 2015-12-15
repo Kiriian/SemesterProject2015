@@ -34,26 +34,13 @@ public class MPJReservation
     {
     }
 
-    /**
-     * Retrieves representation of an instance of rest.MPJReservation
-     * @return an instance of java.lang.String
-//     */
-//    @POST
-//    @Produces("application/json")
-//    @Consumes("application/json")
-//    public String sendResponse()
-//    {
-//       
-//    }
-
-    /**
-     * PUT method for updating or creating an instance of MPJReservation
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
-    @PUT
+    
+    @POST
+    @Produces("application/json")
     @Consumes("application/json")
-    public void putJson(String content)
+    public String sendResponse(String reservation)
     {
+       return null;
     }
+
 }

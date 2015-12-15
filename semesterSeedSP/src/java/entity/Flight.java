@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -122,7 +124,7 @@ public class Flight implements Serializable
     {
         this.destination = destination;
     }
-
+    
     @Override
     public String toString()
     {
