@@ -36,16 +36,17 @@ public class MPJFlightInfoAPI
         for (Flight f : flights)
         {
             JsonObject jo = new JsonObject();
-            jo.addProperty("date", f.getDate());
+            jo.addProperty("date", f.getDato());
             jo.addProperty("numberOfSeats", f.getNumberOfSeats());
             jo.addProperty("totalPrice", f.getTotalPrice());
-            jo.addProperty("flightID", f.getFligthID());
+            jo.addProperty("flightID", f.getFlightID());
             jo.addProperty("traveltime", f.getTraveltime());
             jo.addProperty("destination", f.getDestination());
             jo.addProperty("origin", f.getOrigin());
             json.add(jo);
         }
         flightcollection.add("flights", json);
+        System.out.println("er der noget her?"+ flightcollection.toString());
         String jsonStr = gson.toJson(flightcollection);
         return jsonStr;
     }

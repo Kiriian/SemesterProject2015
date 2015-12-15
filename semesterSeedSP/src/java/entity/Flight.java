@@ -18,9 +18,9 @@ import javax.persistence.Id;
 public class Flight implements Serializable
 {
     @Id
-    private String fligthID;
+    private String flightID;
     private String airlineName;
-    private String date;
+    private String dato;
     private int numberOfSeats;
     private double totalPrice;
     private int traveltime;
@@ -34,10 +34,10 @@ public class Flight implements Serializable
     public Flight(String airlineName, String date, int numberOfSeats, double totalPrice, String fligthID, int traveltime, String destination, String origin)
     {
         this.airlineName = airlineName;
-        this.date = date;
+        this.dato = date;
         this.numberOfSeats = numberOfSeats;
         this.totalPrice = totalPrice;
-        this.fligthID = fligthID;
+        this.flightID = fligthID;
         this.traveltime = traveltime;
         this.destination = destination;
         this.origin = origin;
@@ -63,14 +63,14 @@ public class Flight implements Serializable
         this.origin = origin;
     }
 
-    public String getDate()
+    public String getDato()
     {
-        return date;
+        return dato;
     }
 
-    public void setDate(String date)
+    public void setDato(String dato)
     {
-        this.date = date;
+        this.dato = dato;
     }
 
     public int getNumberOfSeats()
@@ -93,14 +93,14 @@ public class Flight implements Serializable
         this.totalPrice = totalPrice;
     }
 
-    public String getFligthID()
+    public String getFlightID()
     {
-        return fligthID;
+        return flightID;
     }
 
-    public void setFligthID(String fligthID)
+    public void setFlightID(String flightID)
     {
-        this.fligthID = fligthID;
+        this.flightID = flightID;
     }
 
     public int getTraveltime()
@@ -126,6 +126,6 @@ public class Flight implements Serializable
     @Override
     public String toString()
     {
-        return "Flight{" + "airlineName=" + airlineName + ", date=" + date + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", fligthID=" + fligthID + ", traveltime=" + traveltime + ", destination=" + destination + ", origin=" + origin + '}';
+        return "Flight{" + "airlineName=" + airlineName + ", date=" + dato + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", fligthID=" + flightID + ", traveltime=" + traveltime + ", destination=" + destination + ", origin=" + origin + '}';
     }
 }

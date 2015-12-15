@@ -24,9 +24,13 @@ public class MPJRequest
     public List<Flight>getFlights(String airport, String date, int numberOfTickets)
     {
        EntityManager em = emf.createEntityManager();
+       String[] splitDate= date.split("T");
+       String newDate= splitDate[0] + "%";
+        System.out.println("new date" + newDate);
         em.getTransaction().begin();
-         flights = em.createQuery("SELECT f from Flight f where f.origin=:airport and f.date=:date and f.numberOfSeats>=:numberOfTickets").setParameter("airport", airport).setParameter("date", date).setParameter("numberOfTickets", numberOfTickets).getResultList();
-        em.getTransaction().commit();
+         flights = em.createQuery("SELECT f from Flight f where f.origin=:airport and f.dato LIKE :dato and f.numberOfSeats>=:numberOfTickets").setParameter("airport", airport).setParameter("dato", newDate).setParameter("numberOfTickets", numberOfTickets).getResultList();
+        System.out.println("select:" + flights.toString());
+         em.getTransaction().commit();
         return flights;
     }
 }

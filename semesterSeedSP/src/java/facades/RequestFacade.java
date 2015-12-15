@@ -26,7 +26,7 @@ public class RequestFacade
     private List<String> urls;
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
-    public List<String> getAirlines()
+    public List<String> getAirlines() throws NoSuchFlightFoundException
     {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -37,29 +37,36 @@ public class RequestFacade
 
     public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
-        String finalUrl;
-        urls = getAirlines();
-        List<Flight> flights = new ArrayList();
-        List<Future<List<Flight>>> list = new ArrayList();
-        ExecutorService executor = Executors.newFixedThreadPool(4);
-
-        for (String url : urls)
+        try
         {
-            finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
-            System.out.println(finalUrl);
-            Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
-            list.add(future);
-        }
+            String finalUrl;
 
-        for (Future<List<Flight>> future : list)
-        {
-            List<Flight> temp = future.get();
-            for (Flight temp1 : temp)
+            urls = getAirlines();
+            List<Flight> flights = new ArrayList();
+            List<Future<List<Flight>>> list = new ArrayList();
+            ExecutorService executor = Executors.newFixedThreadPool(4);
+
+            for (String url : urls)
             {
-                flights.add(temp1);
+                finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
+                System.out.println(finalUrl);
+                Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
+                list.add(future);
             }
+
+            for (Future<List<Flight>> future : list)
+            {
+                List<Flight> temp = future.get();
+                for (Flight temp1 : temp)
+                {
+                    flights.add(temp1);
+                }
+            }
+            return flights;
+        } catch(NoSuchFlightFoundException e) 
+        {
+            throw new NoSuchFlightFoundException(e.getMessage());
         }
-        return flights;
     }
 
     public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException

@@ -56,10 +56,10 @@ public class Request
         {
             JsonObject jo = new JsonObject();
             jo.addProperty("airline", f.getAirlineName());
-            jo.addProperty("date", f.getDate());
+            jo.addProperty("date", f.getDato());
             jo.addProperty("numberOfSeats", f.getNumberOfSeats());
             jo.addProperty("totalPrice", f.getTotalPrice());
-            jo.addProperty("flightID", f.getFligthID());
+            jo.addProperty("flightID", f.getFlightID());
             jo.addProperty("traveltime", f.getTraveltime());
             jo.addProperty("destination", f.getDestination());
             jo.addProperty("origin", f.getOrigin());
@@ -83,10 +83,10 @@ public class Request
         {
             JsonObject jo = new JsonObject();
             jo.addProperty("airline", f.getAirlineName());
-            jo.addProperty("date", f.getDate());
+            jo.addProperty("date", f.getDato());
             jo.addProperty("numberOfSeats", f.getNumberOfSeats());
             jo.addProperty("totalPrice", f.getTotalPrice());
-            jo.addProperty("flightID", f.getFligthID());
+            jo.addProperty("flightID", f.getFlightID());
             jo.addProperty("traveltime", f.getTraveltime());
             jo.addProperty("destination", f.getDestination());
             jo.addProperty("origin", f.getOrigin());

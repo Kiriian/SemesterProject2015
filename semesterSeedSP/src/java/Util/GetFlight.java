@@ -13,6 +13,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import entity.Flight;
+import exceptions.NoSuchFlightFoundException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -99,10 +100,9 @@ public class GetFlight implements Callable<List<Flight>>
                 }
             }
             return flights;
-        } catch (IOException | JsonIOException e)
+        } catch (Exception e)
         {
-            System.out.println("Input/Output error");
-            return null;
+            throw new NoSuchFlightFoundException("No flights available");
             
         }
     }
