@@ -1,7 +1,7 @@
 <h3>Reservation {{flight.airline}}</h3>
 <hr>
 <br>
-<form>
+<form name="myForm" novalidate="">
     <div class="form-group">
         <div class="col-md-12">
             <div class="form-group row">
@@ -42,7 +42,8 @@
                 <br>
                 <label for="email" class="col-md-2 control-label">Email: </label>
                 <div class="col-md-5">
-                    <input type="text" ng-model="ReserveeEmail"name="email" value="" size="50" class="form-control" placeholder="Please Enter Your Email" required=""/>
+                    <input type="email" ng-show="myForm.email.$dirty && myForm.email.$invalid" ng-model="ReserveeEmail" name="email" value="" size="50" class="form-control" placeholder="Please Enter Your Email" required=""/>
+                    <span ng-show="myForm.email.$error.email">Invalid email address.</span>
                 </div>
                 <br>
                 <br>

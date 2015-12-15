@@ -47,33 +47,38 @@ public class RequestFacade
         }
     }
 
-    public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
+    public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws NoSuchFlightFoundException, InterruptedException
     {
-
         String finalUrl;
-
         urls = getAirlines();
         List<Flight> flights = new ArrayList();
         List<Future<List<Flight>>> list = new ArrayList();
         ExecutorService executor = Executors.newFixedThreadPool(4);
-
-        for (String url : urls)
+        try
         {
-            finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
-            Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
-            list.add(future);
-        }
-
-        for (Future<List<Flight>> future : list)
-        {
-            List<Flight> temp = future.get();
-            for (Flight temp1 : temp)
+            for (String url : urls)
             {
-                flights.add(temp1);
+                finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
+
+                Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
+
+                list.add(future);
             }
+
+            for (Future<List<Flight>> future : list)
+            {
+                List<Flight> temp = future.get();
+                for (Flight temp1 : temp)
+                {
+                    flights.add(temp1);
+                }
+            }
+
+        } catch (ExecutionException e)
+        {
+            throw new NoSuchFlightFoundException(e.getMessage());
         }
         return flights;
-
     }
 
     public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException

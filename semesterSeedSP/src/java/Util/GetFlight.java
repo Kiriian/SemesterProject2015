@@ -13,6 +13,7 @@ import entity.Airline;
 import entity.Flight;
 import exceptions.NoSuchFlightFoundException;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -50,7 +51,7 @@ public class GetFlight implements Callable<List<Flight>>
     //modtage json resultater
     //videresende json resultater
     @Override
-    public List<Flight> call() throws Exception
+    public List<Flight> call() throws NoSuchFlightFoundException
     {
         try
         {
@@ -59,7 +60,8 @@ public class GetFlight implements Callable<List<Flight>>
             gson = new Gson();
             url = new URL(finalUrl);
             urlConn = url.openConnection();
-            if (urlConn != null && urlConn.getInputStream() != null)
+            InputStream in1 = urlConn.getInputStream();
+            if (urlConn != null && in1 != null)
             {
 
                 in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
@@ -69,14 +71,9 @@ public class GetFlight implements Callable<List<Flight>>
                 {
                     sb.append((char) cp);
                 }
-                
-                try{
+
                 object = new JsonParser().parse(sb.toString()).getAsJsonObject();
-                }
-                catch (IllegalStateException e)
-                {
-                    return null;
-                }
+
                 airlineName = object.get("airline").getAsString();
                 jsonArray = object.get("flights").getAsJsonArray();
 
@@ -99,9 +96,10 @@ public class GetFlight implements Callable<List<Flight>>
             return flights;
         } catch (Exception e)
         {
+            System.out.println("Vi er i catch" + e.getMessage());
             e.printStackTrace();
             throw new NoSuchFlightFoundException("No flights available");
-            
+
         }
     }
 }
