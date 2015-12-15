@@ -37,8 +37,7 @@ public class RequestFacade
 
     public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
     {
-        try
-        {
+       
             String finalUrl;
 
             urls = getAirlines();
@@ -63,10 +62,7 @@ public class RequestFacade
                 }
             }
             return flights;
-        } catch(NoSuchFlightFoundException e) 
-        {
-            throw new NoSuchFlightFoundException(e.getMessage());
-        }
+        
     }
 
     public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
