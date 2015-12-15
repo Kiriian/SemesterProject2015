@@ -116,26 +116,27 @@ angular.module('myApp.security', [])
               }
               $rootScope.error = "";
               return config;
-            },
-            responseError: function (rejection) {
-              var err = rejection.data;
-              if (typeof err.error === 'undefined' || typeof err.error.code === 'undefined') {
-                $q.reject(rejection);
-              }
-              $rootScope.error = err.error.code + ": ";
-
-              if (err.error.code === 401) {
-                $rootScope.error += " You are are not Authenticated - did you log on to the system";
-              }
-              else {
-                $rootScope.error += err.error.message;
-              }
-              if (err.error.code === 403) {
-
-              }
-
-              return $q.reject(rejection);
             }
+//            ,
+//            responseError: function (rejection) {
+//              var err = rejection.data;
+//              if (typeof err.error === 'undefined' || typeof err.error.code === 'undefined') {
+//                $q.reject(rejection);
+//              }
+//              $rootScope.error = err.error.code + ": ";
+//
+//              if (err.error.code === 401) {
+//                $rootScope.error += " You are are not Authenticated - did you log on to the system";
+//              }
+//              else {
+//                $rootScope.error += err.error.message;
+//              }
+//              if (err.error.code === 403) {
+//
+//              }
+//
+//              return $q.reject(rejection);
+//            }
           };
         });
 

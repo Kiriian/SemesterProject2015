@@ -50,9 +50,10 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
 
             $http.get(url).then(function successCallBack(res) {
                 $scope.data = res.data;
+                $scope.error = null;
                 
             }, function errorCallBack(res) {
-                $scope.error = "There are no available flights"
+                $scope.error = res.data.message;
                 $scope.data = null;
             });
         };

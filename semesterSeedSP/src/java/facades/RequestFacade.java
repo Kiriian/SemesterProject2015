@@ -50,6 +50,7 @@ public class RequestFacade
     public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws NoSuchFlightFoundException, InterruptedException
     {
         String finalUrl;
+        int counter = 0;
         urls = getAirlines();
         List<Flight> flights = new ArrayList();
         List<Future<List<Flight>>> list = new ArrayList();
@@ -70,13 +71,21 @@ public class RequestFacade
                 List<Flight> temp = future.get();
                 for (Flight temp1 : temp)
                 {
-                    flights.add(temp1);
+                    try
+                    {
+                        flights.add(temp1);
+                    } catch (Exception e)
+                    {
+                        counter++;
+                    }
                 }
             }
-
         } catch (ExecutionException e)
         {
-            throw new NoSuchFlightFoundException(e.getMessage());
+            if (flights.size()==counter)
+            {
+                throw new NoSuchFlightFoundException(e.getMessage());
+            }
         }
         return flights;
     }

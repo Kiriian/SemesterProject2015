@@ -96,8 +96,6 @@ public class GetFlight implements Callable<List<Flight>>
             return flights;
         } catch (Exception e)
         {
-            System.out.println("Vi er i catch" + e.getMessage());
-            e.printStackTrace();
             throw new NoSuchFlightFoundException("No flights available");
 
         }
