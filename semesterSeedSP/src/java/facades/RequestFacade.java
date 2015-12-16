@@ -50,7 +50,6 @@ public class RequestFacade
     public List<Flight> getFlights(String airport, String date, int numberOfTickets) throws NoSuchFlightFoundException, InterruptedException
     {
         String finalUrl;
-        int counter = 0;
         urls = getAirlines();
         List<Flight> flights = new ArrayList();
         List<Future<List<Flight>>> list = new ArrayList();
@@ -60,10 +59,11 @@ public class RequestFacade
             for (String url : urls)
             {
                 finalUrl = url + "api/flightinfo/" + airport + "/" + date + "/" + numberOfTickets + "";
-
                 Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
-
-                list.add(future);
+                if (future.get() != null)
+                {
+                    list.add(future);
+                }
             }
 
             for (Future<List<Flight>> future : list)
@@ -71,60 +71,66 @@ public class RequestFacade
                 List<Flight> temp = future.get();
                 for (Flight temp1 : temp)
                 {
-                    try
+                    if (temp1 != null)
                     {
                         flights.add(temp1);
-                    } catch (Exception e)
-                    {
-                        counter++;
                     }
                 }
+
+            }
+            if (flights.isEmpty())
+            {
+                throw new NoSuchFlightFoundException("There are no available flights");
             }
         } catch (ExecutionException e)
         {
-            if (flights.size()==counter)
-            {
-                throw new NoSuchFlightFoundException(e.getMessage());
-            }
+            throw new NoSuchFlightFoundException(e.getMessage());
         }
         return flights;
     }
 
-    public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
+    public List<Flight> getFlights(String airport, String destination, String date, int numberOfTickets) throws InterruptedException, NoSuchFlightFoundException
     {
         String finalUrl;
         urls = getAirlines();
         List<Flight> flights = new ArrayList();
         List<Future<List<Flight>>> list = new ArrayList();
         ExecutorService executor = Executors.newFixedThreadPool(4);
-
-        for (String url : urls)
+        try
         {
-            finalUrl = url + "api/flightinfo/" + airport + "/" + destination + "/" + date + "/" + numberOfTickets + "";
-            Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
-            list.add(future);
-        }
-
-        for (Future<List<Flight>> future : list)
-        {
-            if (future.get() != null)
+            for (String url : urls)
             {
-                List<Flight> temp = future.get();
-                for (Flight temp1 : temp)
+                finalUrl = url + "api/flightinfo/" + airport + "/" + destination + "/" + date + "/" + numberOfTickets + "";
+                Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
+                if (future.get() != null)
                 {
-
-                    flights.add(temp1);
+                    list.add(future);
                 }
             }
+
+            for (Future<List<Flight>> future : list)
+            {
+                if (future.get() != null)
+                {
+                    List<Flight> temp = future.get();
+                    for (Flight temp1 : temp)
+                    {
+                        if (temp1 != null)
+                        {
+                            flights.add(temp1);
+                        }
+                    }
+                }
+            }
+            if (flights.isEmpty())
+            {
+                throw new NoSuchFlightFoundException("There are no available flights");
+            }
+        } catch (ExecutionException e)
+        {
+            throw new NoSuchFlightFoundException(e.getMessage());
         }
         return flights;
-    }
-
-    public static void main(String[] args)
-    {
-        String loggerFile = "LogFile.txt";
-
-        Utils.setLogFile(loggerFile, RequestFacade.class.getName());
     }
 
     public void logSearchCritieria(LoggerSearchData lsd)

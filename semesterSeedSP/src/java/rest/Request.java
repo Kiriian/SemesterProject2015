@@ -68,7 +68,7 @@ public class Request
             json.add(jo);
         }
         String jsonStr = gson.toJson(json);
-        System.out.println(jsonStr);
+        System.out.println("Her er jeg " + jsonStr);
         return jsonStr;
 
     }
@@ -77,7 +77,7 @@ public class Request
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{airport}/{destination}/{date}/{numberOfTickets}")
-    public String getInfoRequestToAndFrom(@PathParam("airport") String airport, @PathParam("destination") String destination, @PathParam("date") String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
+    public String getInfoRequestToAndFrom(@PathParam("airport") String airport, @PathParam("destination") String destination, @PathParam("date") String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, NoSuchFlightFoundException
     {
         List<Flight> flights = rf.getFlights(airport, destination, date, numberOfTickets);
         JsonArray json = new JsonArray();

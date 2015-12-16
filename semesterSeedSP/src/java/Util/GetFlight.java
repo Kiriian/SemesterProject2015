@@ -15,6 +15,7 @@ import exceptions.NoSuchFlightFoundException;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -31,7 +32,7 @@ public class GetFlight implements Callable<List<Flight>>
 
     private URL url = null;
     private String finalUrl = "";
-    private URLConnection urlConn = null;
+    private HttpURLConnection urlConn = null;
     private InputStreamReader in = null;
     private final StringBuilder sb = new StringBuilder();
     private BufferedReader bufferedReader = null;
@@ -55,15 +56,14 @@ public class GetFlight implements Callable<List<Flight>>
     {
         try
         {
-            flights = new ArrayList<>();
+            flights = null;
             object = new JsonObject();
             gson = new Gson();
             url = new URL(finalUrl);
-            urlConn = url.openConnection();
-            InputStream in1 = urlConn.getInputStream();
-            if (urlConn != null && in1 != null)
+            urlConn = (HttpURLConnection) url.openConnection();
+            if (urlConn != null && urlConn.getResponseCode() < 400)
             {
-
+                flights = new ArrayList<>();
                 in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
                 bufferedReader = new BufferedReader(in);
                 int cp;
