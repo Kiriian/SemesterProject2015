@@ -60,9 +60,12 @@ public class GetFlight implements Callable<List<Flight>>
             object = new JsonObject();
             gson = new Gson();
             url = new URL(finalUrl);
+            System.out.println("her er vi før urlConn..." + url);
             urlConn = (HttpURLConnection) url.openConnection();
+            System.out.println("Her er error kode: " + urlConn.getResponseCode());
             if (urlConn != null && urlConn.getResponseCode() < 400)
             {
+                System.out.println("Hvis error code er mindre en 400 burde vi komme her ind");
                 flights = new ArrayList<>();
                 in = new InputStreamReader(urlConn.getInputStream(), Charset.defaultCharset());
                 bufferedReader = new BufferedReader(in);
@@ -71,9 +74,9 @@ public class GetFlight implements Callable<List<Flight>>
                 {
                     sb.append((char) cp);
                 }
-
+                System.out.println("Her er vi før vi laver jsonObjectet: " + sb.toString());
                 object = new JsonParser().parse(sb.toString()).getAsJsonObject();
-
+                System.out.println("Her er vores jsonobject: " + object.toString());
                 airlineName = object.get("airline").getAsString();
                 jsonArray = object.get("flights").getAsJsonArray();
 

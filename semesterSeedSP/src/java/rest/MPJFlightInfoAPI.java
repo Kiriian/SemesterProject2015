@@ -60,6 +60,8 @@ public class MPJFlightInfoAPI
     {
         List<Flight> flights = mpj.getFlights(airport, destination, date, numberOfTickets);
         JsonArray json = new JsonArray();
+        JsonObject flightcollection = new JsonObject();
+        flightcollection.addProperty("airline", "MPJ Air");
         for (Flight f : flights)
         {
             JsonObject jo = new JsonObject();
@@ -73,7 +75,8 @@ public class MPJFlightInfoAPI
             jo.addProperty("origin", f.getOrigin());
             json.add(jo);
         }
-        String jsonStr = gson.toJson(json);
+        flightcollection.add("flights", json);
+        String jsonStr = gson.toJson(flightcollection);
         return jsonStr;
     }
 

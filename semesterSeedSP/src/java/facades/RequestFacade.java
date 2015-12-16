@@ -76,7 +76,6 @@ public class RequestFacade
                         flights.add(temp1);
                     }
                 }
-
             }
             if (flights.isEmpty())
             {
@@ -104,30 +103,37 @@ public class RequestFacade
                 Future<List<Flight>> future = executor.submit(new GetFlight(finalUrl));
                 if (future.get() != null)
                 {
+                    System.out.println("er future andet en null? " + future.get().toString());
                     list.add(future);
+                }
+                else
+                {
+                    System.out.println("Er future null?");
                 }
             }
 
             for (Future<List<Flight>> future : list)
             {
-                if (future.get() != null)
+                List<Flight> temp = future.get();
+                for (Flight temp1 : temp)
                 {
-                    List<Flight> temp = future.get();
-                    for (Flight temp1 : temp)
+                    System.out.println("Her er vi før vi tjekker at temp1 ikke er null");
+                    if (temp1 != null)
                     {
-                        if (temp1 != null)
-                        {
-                            flights.add(temp1);
-                        }
+                        System.out.println("Hvad er temp1? " + temp1.toString());
+                        flights.add(temp1);
                     }
                 }
             }
             if (flights.isEmpty())
             {
+                System.out.println("Er flights empty? " + flights.size());
                 throw new NoSuchFlightFoundException("There are no available flights");
             }
         } catch (ExecutionException e)
         {
+            System.out.println("Er det en anden fejl? ");
+            e.printStackTrace();
             throw new NoSuchFlightFoundException(e.getMessage());
         }
         return flights;

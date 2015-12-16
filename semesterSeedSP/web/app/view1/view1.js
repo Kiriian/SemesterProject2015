@@ -34,13 +34,9 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
 
             if ($scope.destination !== "null")
             {
-                if ($scope.origin !== $scope.destination)
-                {
+
                     var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
-                } else
-                {
-                    $scope.error = "Depature airport and destination can not be the same";
-                }
+
             } else
             {
                 var attributes = $scope.origin + "/" + searchDate + "/" + $scope.nop;

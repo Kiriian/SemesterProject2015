@@ -68,7 +68,6 @@ public class Request
             json.add(jo);
         }
         String jsonStr = gson.toJson(json);
-        System.out.println("Her er jeg " + jsonStr);
         return jsonStr;
 
     }
@@ -97,6 +96,7 @@ public class Request
             json.add(jo);
         }
         String jsonStr = gson.toJson(json);
+        System.out.println("Her er hvad vi returner til html siden: " + jsonStr);
         return jsonStr;
     }
 }
