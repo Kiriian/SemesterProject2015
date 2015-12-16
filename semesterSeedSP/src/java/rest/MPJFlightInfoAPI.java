@@ -39,7 +39,7 @@ public class MPJFlightInfoAPI
         {
             JsonObject jo = new JsonObject();
             jo.addProperty("date", f.getDato());
-            jo.addProperty("numberOfSeats", f.getNumberOfSeats());
+            jo.addProperty("numberOfSeats", numberOfTickets);
             jo.addProperty("totalPrice", f.getTotalPrice());
             jo.addProperty("flightID", f.getFlightID());
             jo.addProperty("traveltime", f.getTraveltime());
@@ -68,7 +68,7 @@ public class MPJFlightInfoAPI
             jo.addProperty("airline", f.getAirlineName());
             jo.addProperty("destination", f.getDestination());
             jo.addProperty("date", f.getDato());
-            jo.addProperty("numberOfSeats", f.getNumberOfSeats());
+            jo.addProperty("numberOfSeats", numberOfTickets);
             jo.addProperty("totalPrice", f.getTotalPrice());
             jo.addProperty("flightID", f.getFlightID());
             jo.addProperty("traveltime", f.getTraveltime());
