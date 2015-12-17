@@ -58,7 +58,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
                 MyService.addFlight(data);
                 $window.location.href = '#/Reserve';
             }, function errorCallBack(res){
-               $scope.error = res.data.message;
+              
             });
         };
 
