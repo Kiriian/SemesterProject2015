@@ -22,7 +22,7 @@ import javax.ws.rs.Path;
  *
  * @author martamiszczyk
  */
-@Path("reservation")
+@Path("flightreservation")
 public class MPJReservationAPI
 {
 
