@@ -29,7 +29,7 @@ public class MPJFlightInfoAPI
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{from}/{date}/{numTickets}")
-    public String searchFlightsToAll(@PathParam("from") String airport, @PathParam("date") String date, @PathParam("numTickets") int numberOfTickets)
+    public String searchFlightsToAll(@PathParam("from") String airport, @PathParam("date") String date, @PathParam("numTickets") int numberOfTickets) throws NoSuchFlightFoundException
     {
         List<Flight> flights = mpj.getFlights(airport, date, numberOfTickets);
         JsonArray json = new JsonArray();
@@ -40,7 +40,7 @@ public class MPJFlightInfoAPI
             JsonObject jo = new JsonObject();
             jo.addProperty("date", f.getDato());
             jo.addProperty("numberOfSeats", numberOfTickets);
-            jo.addProperty("totalPrice", f.getTotalPrice());
+            jo.addProperty("totalPrice", (f.getTotalPrice()*numberOfTickets));
             jo.addProperty("flightID", f.getFlightID());
             jo.addProperty("traveltime", f.getTraveltime());
             jo.addProperty("destination", f.getDestination());
@@ -55,7 +55,7 @@ public class MPJFlightInfoAPI
     @Produces("application/json")
     @Consumes("application/json")
     @Path("{airport}/{destination}/{date}/{numberOfTickets}")
-    public String getInfoRequestToAndFrom(@PathParam("airport") String airport,@PathParam("destination") String destination, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws InterruptedException, ExecutionException, NoSuchFlightFoundException
+    public String getInfoRequestToAndFrom(@PathParam("airport") String airport,@PathParam("destination") String destination, @PathParam("date")String date, @PathParam("numberOfTickets") int numberOfTickets) throws NoSuchFlightFoundException
     {
         List<Flight> flights = mpj.getFlights(airport, destination, date, numberOfTickets);
         JsonArray json = new JsonArray();
@@ -68,7 +68,7 @@ public class MPJFlightInfoAPI
             jo.addProperty("destination", f.getDestination());
             jo.addProperty("date", f.getDato());
             jo.addProperty("numberOfSeats", numberOfTickets);
-            jo.addProperty("totalPrice", f.getTotalPrice());
+            jo.addProperty("totalPrice", (f.getTotalPrice()*numberOfTickets));
             jo.addProperty("flightID", f.getFlightID());
             jo.addProperty("traveltime", f.getTraveltime());
             jo.addProperty("origin", f.getOrigin());
