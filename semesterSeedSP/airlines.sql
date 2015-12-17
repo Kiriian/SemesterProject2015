@@ -3,6 +3,5 @@ INSERT INTO AIRLINE (URL, AIRLINENAME) VALUES ('http://semesterproject-martamisz
 INSERT INTO AIRLINE (URL, AIRLINENAME) VALUES ('http://wildfly-x.cloudapp.net/airline/','COSGrp2 Airline');
 INSERT INTO AIRLINE (URL, AIRLINENAME) VALUES ('http://jstairline-hardboilr.rhcloud.com/','JST Airlines');
 INSERT INTO AIRLINE (URL, AIRLINENAME) VALUES ('http://sargardon-001-site1.atempurl.com/','Norwegian');
-INSERT INTO AIRLINE (URL, AIRLINENAME) VALUES ('http://infamouslines-baniproductions.rhcloud.com','Infamous Lines');
 INSERT INTO AIRLINE (URL, AIRLINENAME) VALUES ('http://frenchyairlines-zerosource.rhcloud.com/','Frenchy Arilines');
 
