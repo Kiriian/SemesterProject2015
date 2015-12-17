@@ -48,7 +48,6 @@ public class MPJFlightInfoAPI
             json.add(jo);
         }
         flightcollection.add("flights", json);
-        System.out.println("er der noget her?"+ flightcollection.toString());
         String jsonStr = gson.toJson(flightcollection);
         return jsonStr;
     }
