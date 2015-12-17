@@ -7,7 +7,6 @@ package facades;
 
 import deploy.DeploymentConfiguration;
 import entity.Flight;
-import entity.Reservation;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

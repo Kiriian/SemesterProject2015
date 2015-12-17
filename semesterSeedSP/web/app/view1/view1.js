@@ -34,7 +34,6 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
 
             if ($scope.destination !== "null")
             {
-
                     var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
 
             } else
@@ -59,7 +58,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
                 MyService.addFlight(data);
                 $window.location.href = '#/Reserve';
             }, function errorCallBack(res){
-               
+               $scope.error = res.data.message;
             });
         };
 
@@ -95,7 +94,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
 
                     }, function errorCallBack(res)
                     {
-                        alert(res.data);
+                        $scope.error = res.data.message;
                     }
                     );
         };
