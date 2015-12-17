@@ -34,7 +34,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
 
             if ($scope.destination !== "null")
             {
-                    var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
+                var attributes = $scope.origin + "/" + $scope.destination + "/" + searchDate + "/" + $scope.nop;
 
             } else
             {
@@ -46,7 +46,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
             $http.get(url).then(function successCallBack(res) {
                 $scope.data = res.data;
                 $scope.error = null;
-                
+
             }, function errorCallBack(res) {
                 $scope.error = res.data.message;
                 $scope.data = null;
@@ -54,11 +54,11 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
         };
 
         $scope.addFlight = function (data) {
-            $http.get("api/demo").then(function successCallBack(res){
+            $http.get("api/demo").then(function successCallBack(res) {
                 MyService.addFlight(data);
                 $window.location.href = '#/Reserve';
-            }, function errorCallBack(res){
-              
+            }, function errorCallBack(res) {
+                $scope.error = "You are are not Authenticated - did you log on to the system";
             });
         };
 
@@ -70,7 +70,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
             $scope.reservation.Passengers.push({});
         }
         ;
-        
+
         $scope.newReservationData = {};
         $scope.$on('set', function () {
             $scope.newReservationData = factoryThing.getThing();
@@ -92,8 +92,7 @@ app.controller('View1Ctrl', ['MyService', 'factoryThing', '$rootScope', '$scope'
                     (function successCallBack(res) {
                         factoryThing.addThing(res.data, $rootScope);
 
-                    }, function errorCallBack(res)
-                    {
+                    }, function errorCallBack(res){
                         $scope.error = res.data.message;
                     }
                     );
